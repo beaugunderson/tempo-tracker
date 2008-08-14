@@ -61,7 +61,7 @@
             // refreshButton
             // 
             this.refreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.refreshButton.Location = new System.Drawing.Point(256, 10);
+            this.refreshButton.Location = new System.Drawing.Point(289, 10);
             this.refreshButton.Name = "refreshButton";
             this.refreshButton.Size = new System.Drawing.Size(60, 23);
             this.refreshButton.TabIndex = 2;
@@ -76,7 +76,7 @@
             this.projectsComboBox.FormattingEnabled = true;
             this.projectsComboBox.Location = new System.Drawing.Point(61, 12);
             this.projectsComboBox.Name = "projectsComboBox";
-            this.projectsComboBox.Size = new System.Drawing.Size(189, 21);
+            this.projectsComboBox.Size = new System.Drawing.Size(222, 21);
             this.projectsComboBox.TabIndex = 1;
             // 
             // label1
@@ -99,7 +99,7 @@
             this.timerEntryGroupBox.Controls.Add(this.timeLabel);
             this.timerEntryGroupBox.Location = new System.Drawing.Point(12, 41);
             this.timerEntryGroupBox.Name = "timerEntryGroupBox";
-            this.timerEntryGroupBox.Size = new System.Drawing.Size(368, 65);
+            this.timerEntryGroupBox.Size = new System.Drawing.Size(401, 65);
             this.timerEntryGroupBox.TabIndex = 4;
             this.timerEntryGroupBox.TabStop = false;
             this.timerEntryGroupBox.Text = "Timer Entry";
@@ -111,7 +111,7 @@
             this.timerStopButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.timerStopButton.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.timerStopButton.Image = ((System.Drawing.Image)(resources.GetObject("timerStopButton.Image")));
-            this.timerStopButton.Location = new System.Drawing.Point(245, 19);
+            this.timerStopButton.Location = new System.Drawing.Point(278, 19);
             this.timerStopButton.Name = "timerStopButton";
             this.timerStopButton.Size = new System.Drawing.Size(36, 36);
             this.timerStopButton.TabIndex = 3;
@@ -124,7 +124,7 @@
             this.timerPlayPauseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.timerPlayPauseButton.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.timerPlayPauseButton.Image = global::TempoTracker.Properties.Resources.control_play;
-            this.timerPlayPauseButton.Location = new System.Drawing.Point(203, 19);
+            this.timerPlayPauseButton.Location = new System.Drawing.Point(236, 19);
             this.timerPlayPauseButton.Name = "timerPlayPauseButton";
             this.timerPlayPauseButton.Size = new System.Drawing.Size(36, 36);
             this.timerPlayPauseButton.TabIndex = 2;
@@ -135,7 +135,7 @@
             // 
             this.sendTimerEntryButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.sendTimerEntryButton.Enabled = false;
-            this.sendTimerEntryButton.Location = new System.Drawing.Point(287, 19);
+            this.sendTimerEntryButton.Location = new System.Drawing.Point(320, 19);
             this.sendTimerEntryButton.Name = "sendTimerEntryButton";
             this.sendTimerEntryButton.Size = new System.Drawing.Size(75, 36);
             this.sendTimerEntryButton.TabIndex = 4;
@@ -172,7 +172,7 @@
             this.notesTextBox.Multiline = true;
             this.notesTextBox.Name = "notesTextBox";
             this.notesTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.notesTextBox.Size = new System.Drawing.Size(351, 31);
+            this.notesTextBox.Size = new System.Drawing.Size(384, 67);
             this.notesTextBox.TabIndex = 0;
             // 
             // taskTimer
@@ -188,9 +188,9 @@
             this.manualEntryGroupBox.Controls.Add(this.label3);
             this.manualEntryGroupBox.Controls.Add(this.hoursNumericUpDown);
             this.manualEntryGroupBox.Controls.Add(this.sendManualEntryButton);
-            this.manualEntryGroupBox.Location = new System.Drawing.Point(12, 174);
+            this.manualEntryGroupBox.Location = new System.Drawing.Point(12, 210);
             this.manualEntryGroupBox.Name = "manualEntryGroupBox";
-            this.manualEntryGroupBox.Size = new System.Drawing.Size(368, 56);
+            this.manualEntryGroupBox.Size = new System.Drawing.Size(401, 56);
             this.manualEntryGroupBox.TabIndex = 6;
             this.manualEntryGroupBox.TabStop = false;
             this.manualEntryGroupBox.Text = "Manual Entry";
@@ -236,7 +236,7 @@
             // sendManualEntryButton
             // 
             this.sendManualEntryButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.sendManualEntryButton.Location = new System.Drawing.Point(287, 18);
+            this.sendManualEntryButton.Location = new System.Drawing.Point(320, 18);
             this.sendManualEntryButton.Name = "sendManualEntryButton";
             this.sendManualEntryButton.Size = new System.Drawing.Size(75, 23);
             this.sendManualEntryButton.TabIndex = 3;
@@ -252,7 +252,7 @@
             this.notesGroupBox.Controls.Add(this.notesTextBox);
             this.notesGroupBox.Location = new System.Drawing.Point(12, 112);
             this.notesGroupBox.Name = "notesGroupBox";
-            this.notesGroupBox.Size = new System.Drawing.Size(368, 56);
+            this.notesGroupBox.Size = new System.Drawing.Size(401, 92);
             this.notesGroupBox.TabIndex = 5;
             this.notesGroupBox.TabStop = false;
             this.notesGroupBox.Text = "Notes";
@@ -261,9 +261,9 @@
             // 
             this.mainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.mainStatusStrip.Location = new System.Drawing.Point(0, 243);
+            this.mainStatusStrip.Location = new System.Drawing.Point(0, 279);
             this.mainStatusStrip.Name = "mainStatusStrip";
-            this.mainStatusStrip.Size = new System.Drawing.Size(392, 22);
+            this.mainStatusStrip.Size = new System.Drawing.Size(425, 22);
             this.mainStatusStrip.TabIndex = 6;
             // 
             // toolStripStatusLabel1
@@ -281,7 +281,7 @@
             // optionsButton
             // 
             this.optionsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.optionsButton.Location = new System.Drawing.Point(322, 10);
+            this.optionsButton.Location = new System.Drawing.Point(355, 10);
             this.optionsButton.Name = "optionsButton";
             this.optionsButton.Size = new System.Drawing.Size(58, 23);
             this.optionsButton.TabIndex = 3;
@@ -293,15 +293,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(392, 265);
+            this.ClientSize = new System.Drawing.Size(425, 301);
             this.Controls.Add(this.optionsButton);
             this.Controls.Add(this.mainStatusStrip);
             this.Controls.Add(this.notesGroupBox);
             this.Controls.Add(this.manualEntryGroupBox);
-            this.Controls.Add(this.timerEntryGroupBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.projectsComboBox);
             this.Controls.Add(this.refreshButton);
+            this.Controls.Add(this.timerEntryGroupBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(400, 292);
             this.Name = "mainForm";

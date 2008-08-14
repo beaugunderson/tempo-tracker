@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace TempoTracker
@@ -21,19 +15,19 @@ namespace TempoTracker
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            ((mainForm)this.Owner).modifier = new TimeSpan(Convert.ToInt64(10000000L * 60L * 60L * entryNumericUpDown.Value));
-            ((mainForm)this.Owner).date = entryDateTimePicker.Value;
+            ((mainForm)Owner).modifier = new TimeSpan(Convert.ToInt64(10000000L * 60L * 60L * entryNumericUpDown.Value));
+            ((mainForm)Owner).date = entryDateTimePicker.Value;
 
-            this.DialogResult = DialogResult.OK;
+            DialogResult = DialogResult.OK;
 
-            this.Close();
+            Close();
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
+            DialogResult = DialogResult.Cancel;
 
-            this.Close();
+            Close();
         }
     }
 }
