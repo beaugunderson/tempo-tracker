@@ -15,7 +15,7 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_8FC6A68C0A464BF7B02571E73804C6D1"
+        "MsmKey" = "8:_7F675C593D9D4FFC81A1CFADDFD3F977"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -136,9 +136,9 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8FC6A68C0A464BF7B02571E73804C6D1"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7F675C593D9D4FFC81A1CFADDFD3F977"
             {
-            "SourcePath" = "8:..\\..\\..\\..\\..\\Desktop\\TempoTracker\\clock.ico"
+            "SourcePath" = "8:..\\TempoTracker\\Resources\\clock.ico"
             "TargetName" = "8:clock.ico"
             "Tag" = "8:"
             "Folder" = "8:_55437EFBB1FB4F90B11E72498609F9C4"
@@ -343,7 +343,7 @@
             "Target" = "8:_97A3941FC97F496F84D41508875FB131"
             "Folder" = "8:_C082D094382E424BB8CFAB1138B7397D"
             "WorkingFolder" = "8:_55437EFBB1FB4F90B11E72498609F9C4"
-            "Icon" = "8:_8FC6A68C0A464BF7B02571E73804C6D1"
+            "Icon" = "8:_7F675C593D9D4FFC81A1CFADDFD3F977"
             "Feature" = "8:"
             }
         }
