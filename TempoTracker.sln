@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TempoTracker", "TempoTracker\TempoTracker.csproj", "{F9D2685C-A7D9-42D8-AAFF-4E0C6EE9C792}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TempoTrackerSetup", "TempoTrackerSetup\TempoTrackerSetup.vdproj", "{C3757B1D-54D7-4D7F-811C-67A8EA735138}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F9D2685C-A7D9-42D8-AAFF-4E0C6EE9C792}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9D2685C-A7D9-42D8-AAFF-4E0C6EE9C792}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9D2685C-A7D9-42D8-AAFF-4E0C6EE9C792}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9D2685C-A7D9-42D8-AAFF-4E0C6EE9C792}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3757B1D-54D7-4D7F-811C-67A8EA735138}.Debug|Any CPU.ActiveCfg = Debug
+		{C3757B1D-54D7-4D7F-811C-67A8EA735138}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
