@@ -248,35 +248,36 @@ namespace TempoTracker
             {
                 return String.Format("{0:N0} seconds", Math.Round(seconds, 0));
             }
-            else if (seconds < 3600)
+            
+            if (seconds < 3600)
             {
                 return String.Format("{0:N2} minutes", Math.Round(seconds/60, 2));
             }
-            else
-            {
-                return String.Format("{0:N3} hours", Math.Round(seconds/3600, 3));
-            }
+            
+            return String.Format("{0:N3} hours", Math.Round(seconds/3600, 3));
         }
 
         private void sendManualEntryButton_Click(object sender, EventArgs e)
         {
-            if (validateManualEntry())
+            if (!validateManualEntry())
             {
-                var p = (Project) projectsComboBox.SelectedItem;
+                return;
+            }
 
-                if (createEvent(hoursNumericUpDown.Value, notesTextBox.Text, manualEntryDateTimePicker.Value, p.id, ""))
-                {
-                    toolStripStatusLabel1.Text = "Successfully created the event.";
+            var p = (Project) projectsComboBox.SelectedItem;
 
-                    if (ResetProjectOnSubmitOption)
-                    {
-                        projectsComboBox.SelectedIndex = projectsComboBox.Items.IndexOf("Select project...");
-                    }
-                }
-                else
+            if (createEvent(hoursNumericUpDown.Value, notesTextBox.Text, manualEntryDateTimePicker.Value, p.id, ""))
+            {
+                toolStripStatusLabel1.Text = "Successfully created the event.";
+
+                if (ResetProjectOnSubmitOption)
                 {
-                    MessageBox.Show("Unable to create the event.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    projectsComboBox.SelectedIndex = projectsComboBox.Items.IndexOf("Select project...");
                 }
+            }
+            else
+            {
+                MessageBox.Show("Unable to create the event.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
