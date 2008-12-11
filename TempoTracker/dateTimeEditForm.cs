@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows.Forms;
 
 namespace TempoTracker
@@ -15,8 +15,8 @@ namespace TempoTracker
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            ((mainForm)Owner).modifier = new TimeSpan(Convert.ToInt64(10000000L * 60L * 60L * entryNumericUpDown.Value));
-            ((mainForm)Owner).date = entryDateTimePicker.Value;
+            ((MainForm)Owner).Modifier = new TimeSpan(Convert.ToInt64(10000000L * 60L * 60L * entryNumericUpDown.Value));
+            ((MainForm)Owner).Date = entryDateTimePicker.Value;
 
             DialogResult = DialogResult.OK;
 

@@ -1,4 +1,4 @@
-﻿#region Using directives
+#region Using directives
 
 using System;
 using System.Security.Cryptography;
@@ -57,7 +57,7 @@ namespace TempoTracker
 
             usernameTextBox.Text = rk.GetValue("username", "").ToString();
 
-            var mf = (mainForm) Owner;
+            var mf = (MainForm) Owner;
 
             showInTaskbarCheckBox.Checked = mf.ShowInTaskbarOption;
             showTimeReminderCheckBox.Checked = mf.ShowTimeReminderOption;
