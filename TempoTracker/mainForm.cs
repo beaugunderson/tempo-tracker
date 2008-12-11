@@ -74,14 +74,11 @@ namespace TempoTracker
             try
             {
                 var webResponse = webRequest.GetResponse() as HttpWebResponse;
-
-                // ReSharper disable PossibleNullReferenceException
-                var sr = new StreamReader(webResponse.GetResponseStream());
-                // ReSharper restore PossibleNullReferenceException
+                var streamReader = new StreamReader(webResponse.GetResponseStream());
 
                 try
                 {
-                    XmlReader xmlReader = XmlReader.Create(sr);
+                    XmlReader xmlReader = XmlReader.Create(streamReader);
 
                     while (xmlReader.Read())
                     {
@@ -99,7 +96,7 @@ namespace TempoTracker
                 catch (XmlException ex)
                 {
                     Console.WriteLine(ex);
-                    Console.WriteLine(sr.ReadToEnd());
+                    Console.WriteLine(streamReader.ReadToEnd());
                 }
 
                 return false;
@@ -148,9 +145,7 @@ namespace TempoTracker
 
                 string name = xmlReader.ReadString();
 
-                var p = new Project(id, name);
-
-                projectsComboBox.Items.Add(p);
+                projectsComboBox.Items.Add(new Project(id, name));
             }
 
             projectsComboBox.SelectedIndex = projectsComboBox.Items.IndexOf("Select project...");
@@ -160,9 +155,7 @@ namespace TempoTracker
         {
             RegistryKey registryKey = Application.UserAppDataRegistry;
 
-            // ReSharper disable PossibleNullReferenceException
             _username = registryKey.GetValue("username", "").ToString();
-            // ReSharper restore PossibleNullReferenceException
             _password = ReadPassword(registryKey);
 
             if (string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password))
