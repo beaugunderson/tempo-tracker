@@ -3,9 +3,9 @@ using System.Windows.Forms;
 
 namespace TempoTracker
 {
-    public partial class dateTimeEditForm : Form
+    public partial class DateTimeEditForm : Form
     {
-        public dateTimeEditForm(TimeSpan elapsed, DateTime date)
+        public DateTimeEditForm(TimeSpan elapsed, DateTime date)
         {
             InitializeComponent();
 

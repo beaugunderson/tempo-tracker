@@ -72,11 +72,11 @@
     <Compile Include="AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="dateTimeEditForm.cs">
+    <Compile Include="DateTimeEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dateTimeEditForm.Designer.cs">
-      <DependentUpon>dateTimeEditForm.cs</DependentUpon>
+    <Compile Include="DateTimeEditForm.Designer.cs">
+      <DependentUpon>DateTimeEditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -84,11 +84,11 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="optionsForm.cs">
+    <Compile Include="OptionsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="optionsForm.Designer.cs">
-      <DependentUpon>optionsForm.cs</DependentUpon>
+    <Compile Include="OptionsForm.Designer.cs">
+      <DependentUpon>OptionsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -96,17 +96,8 @@
       <DependentUpon>AboutBox.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="dateTimeEditForm.resx">
-      <DependentUpon>dateTimeEditForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="optionsForm.resx">
-      <DependentUpon>optionsForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

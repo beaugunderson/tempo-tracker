@@ -1,6 +1,6 @@
-﻿namespace TempoTracker
+namespace TempoTracker
 {
-    partial class optionsForm
+    partial class OptionsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(optionsForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OptionsForm));
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.usernameTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -40,6 +40,7 @@
             this.warnOnEmptyNotesCheckBox = new System.Windows.Forms.CheckBox();
             this.showInTaskbarCheckBox = new System.Windows.Forms.CheckBox();
             this.resetProjectOnSubmitCheckBox = new System.Windows.Forms.CheckBox();
+            this.displayTimeHoursMinutesCheckbox = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,7 +79,7 @@
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(152, 184);
+            this.saveButton.Location = new System.Drawing.Point(150, 209);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 6;
@@ -89,7 +90,7 @@
             // cancelButton
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(71, 184);
+            this.cancelButton.Location = new System.Drawing.Point(69, 209);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 5;
@@ -99,13 +100,14 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.displayTimeHoursMinutesCheckbox);
             this.groupBox1.Controls.Add(this.showTimeReminderCheckBox);
             this.groupBox1.Controls.Add(this.warnOnEmptyNotesCheckBox);
             this.groupBox1.Controls.Add(this.showInTaskbarCheckBox);
             this.groupBox1.Controls.Add(this.resetProjectOnSubmitCheckBox);
             this.groupBox1.Location = new System.Drawing.Point(12, 58);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(274, 115);
+            this.groupBox1.Size = new System.Drawing.Size(274, 145);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             // 
@@ -149,13 +151,23 @@
             this.resetProjectOnSubmitCheckBox.Text = "Reset project on submission";
             this.resetProjectOnSubmitCheckBox.UseVisualStyleBackColor = true;
             // 
-            // optionsForm
+            // displayTimeHoursMinutesCheckbox
+            // 
+            this.displayTimeHoursMinutesCheckbox.AutoSize = true;
+            this.displayTimeHoursMinutesCheckbox.Location = new System.Drawing.Point(12, 111);
+            this.displayTimeHoursMinutesCheckbox.Name = "displayTimeHoursMinutesCheckbox";
+            this.displayTimeHoursMinutesCheckbox.Size = new System.Drawing.Size(182, 17);
+            this.displayTimeHoursMinutesCheckbox.TabIndex = 3;
+            this.displayTimeHoursMinutesCheckbox.Text = "Display time in HH:MM:SS format";
+            this.displayTimeHoursMinutesCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // OptionsForm
             // 
             this.AcceptButton = this.saveButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
-            this.ClientSize = new System.Drawing.Size(298, 216);
+            this.ClientSize = new System.Drawing.Size(298, 241);
             this.ControlBox = false;
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.cancelButton);
@@ -165,7 +177,7 @@
             this.Controls.Add(this.usernameTextBox);
             this.Controls.Add(this.passwordTextBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "optionsForm";
+            this.Name = "OptionsForm";
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Options";
@@ -191,5 +203,6 @@
         private System.Windows.Forms.CheckBox showInTaskbarCheckBox;
         private System.Windows.Forms.CheckBox resetProjectOnSubmitCheckBox;
         private System.Windows.Forms.CheckBox showTimeReminderCheckBox;
+        private System.Windows.Forms.CheckBox displayTimeHoursMinutesCheckbox;
     }
 }

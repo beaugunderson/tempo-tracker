@@ -1,6 +1,6 @@
 ﻿namespace TempoTracker
 {
-    partial class dateTimeEditForm
+    partial class DateTimeEditForm
     {
         /// <summary>
         /// Required designer variable.

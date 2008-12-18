@@ -13,12 +13,13 @@ namespace TempoTracker
     public partial class MainForm : Form
     {
         #region Locals
-        private const string _apiUrl = "https://app.keeptempo.com";
+        private const string API_URL = "https://app.keeptempo.com";
 
         private TimeSpan _elapsed;
         private string _password;
 
         private bool _paused;
+        private int _balloonTipCount;
         private DateTime _start;
         private string _username;
         #endregion
@@ -30,6 +31,7 @@ namespace TempoTracker
         public bool ShowTimeReminderOption { get; set; }
         public bool ShowInTaskbarOption { get; set; }
         public bool ResetProjectOnSubmitOption { get; set; }
+        public bool DisplayTimeHoursMinutesOption { get; set; }
         #endregion
 
         public MainForm()
@@ -49,9 +51,9 @@ namespace TempoTracker
 
         private bool createEvent(decimal hours, string notes, DateTime dateTime, int id)
         {
-            string eventXml = string.Format("<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry><hours type=\"decimal\">{0:N2}</hours><notes>{1:S}</notes><project-id type=\"integer\">{2:G}</project-id><occurred-on type=\"datetime\">{3:s}</occurred-on></entry>", hours, notes, id, dateTime);
+            string eventXml = string.Format("<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry><hours>{0:N2}</hours><notes>{1:S}</notes><project-id>{2:G}</project-id><occurred-on>{3:s}</occurred-on></entry>", hours, notes, id, dateTime);
 
-            string url = string.Format("{0}/entries", _apiUrl);
+            string url = string.Format("{0}/entries", API_URL);
 
             var webRequest = WebRequest.Create(url) as HttpWebRequest;
 
@@ -111,7 +113,7 @@ namespace TempoTracker
 
         private void updateProjects()
         {
-            string url = string.Format("{0}/projects", _apiUrl);
+            string url = string.Format("{0}/projects", API_URL);
 
             var webRequest = WebRequest.Create(url) as HttpWebRequest;
 
@@ -155,12 +157,19 @@ namespace TempoTracker
         {
             RegistryKey registryKey = Application.UserAppDataRegistry;
 
-            _username = registryKey.GetValue("username", "").ToString();
+            if (registryKey == null)
+            {
+                MessageBox.Show("There was an error reading the user registry.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return;
+            }
+
+            _username = registryKey.GetValue("username", string.Empty).ToString();
             _password = ReadPassword(registryKey);
 
             if (string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password))
             {
-                var optionsForm = new optionsForm();
+                var optionsForm = new OptionsForm();
 
                 if (optionsForm.ShowDialog(this) != DialogResult.OK)
                 {
@@ -174,6 +183,7 @@ namespace TempoTracker
             ShowTimeReminderOption = Convert.ToBoolean((int)registryKey.GetValue("showTimeReminder", 0));
             WarnOnEmptyNotesOption = Convert.ToBoolean((int)registryKey.GetValue("warnOnEmptyNotes", 1));
             ResetProjectOnSubmitOption = Convert.ToBoolean((int)registryKey.GetValue("resetProjectOnSubmit", 1));
+            DisplayTimeHoursMinutesOption = Convert.ToBoolean((int)registryKey.GetValue("displayTimeHoursMinutes", 1));
 
             ShowInTaskbar = ShowInTaskbarOption;
         }
@@ -185,19 +195,19 @@ namespace TempoTracker
             updateProjects();
         }
 
-        public static string ReadPassword(RegistryKey rk)
+        public static string ReadPassword(RegistryKey registryKey)
         {
             try
             {
                 byte[] entropy = { 0x01, 0x02, 0x03, 0x05, 0x07, 0x11 };
-                byte[] protectedSecret = Convert.FromBase64String(rk.GetValue("password", "").ToString());
+                byte[] protectedSecret = Convert.FromBase64String(registryKey.GetValue("password", string.Empty).ToString());
                 byte[] secret = ProtectedData.Unprotect(protectedSecret, entropy, DataProtectionScope.CurrentUser);
 
                 return Encoding.Unicode.GetString(secret);
             }
-            catch (CryptographicException ce)
+            catch (CryptographicException cryptographicException)
             {
-                Console.WriteLine(ce);
+                Console.WriteLine(cryptographicException);
 
                 return null;
             }
@@ -207,7 +217,14 @@ namespace TempoTracker
         {
             _elapsed = (DateTime.Now - _start) + Modifier;
 
-            timeLinkLabel.Text = fuzzyFormatTime(_elapsed.TotalSeconds);
+            timeLinkLabel.Text = DisplayTimeHoursMinutesOption ? regularFormatTime(_elapsed) : fuzzyFormatTime(_elapsed.TotalSeconds);
+
+            if (ShowTimeReminderOption && (int)_elapsed.TotalMinutes / 10 > _balloonTipCount)
+            {
+                _balloonTipCount++;
+
+                tempoTrackerNotifyIcon.ShowBalloonTip(5000, "Time update", string.Format("You've now worked {0}.", regularFormatTime(_elapsed)), ToolTipIcon.Info);
+            }
         }
 
         private static string fuzzyFormatTime(double seconds)
@@ -223,6 +240,13 @@ namespace TempoTracker
             }
 
             return string.Format("{0:N3} hours", Math.Round(seconds / 3600, 3));
+        }
+
+        private static string regularFormatTime(TimeSpan timeSpan)
+        {
+            DateTime dateTime = DateTime.MinValue.Add(timeSpan);
+
+            return dateTime.ToString("H:mm:ss");
         }
 
         private void sendManualEntryButton_Click(object sender, EventArgs e)
@@ -339,8 +363,8 @@ namespace TempoTracker
                 _paused = false;
                 taskTimer.Enabled = false;
                 timerPlayPauseButton.Image = Resources.control_play;
-                notesTextBox.Text = "";
-                timeLinkLabel.Text = "";
+                notesTextBox.Text = string.Empty;
+                timeLinkLabel.Text = string.Empty;
 
                 if (ResetProjectOnSubmitOption)
                 {
@@ -355,9 +379,9 @@ namespace TempoTracker
 
         private void timeLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var fdte = new dateTimeEditForm(_elapsed, Date);
+            var dateTimeEditForm = new DateTimeEditForm(_elapsed, Date);
 
-            if (fdte.ShowDialog(this) == DialogResult.OK)
+            if (dateTimeEditForm.ShowDialog(this) == DialogResult.OK)
             {
                 _start = DateTime.Now;
                 _elapsed = new TimeSpan();
@@ -401,6 +425,7 @@ namespace TempoTracker
 
                     sendTimerEntryButton.Enabled = true;
 
+                    _balloonTipCount = 0;
                     Date = DateTime.Today;
                     _start = DateTime.Now;
                     Modifier = new TimeSpan();
@@ -422,7 +447,7 @@ namespace TempoTracker
 
         private void optionsButton_Click(object sender, EventArgs e)
         {
-            var optionsForm1 = new optionsForm();
+            var optionsForm1 = new OptionsForm();
 
             if (optionsForm1.ShowDialog(this) == DialogResult.OK)
             {
