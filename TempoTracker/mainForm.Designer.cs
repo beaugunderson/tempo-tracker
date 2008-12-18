@@ -29,6 +29,7 @@ namespace TempoTracker
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.refreshButton = new System.Windows.Forms.Button();
             this.projectsComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -109,6 +110,7 @@ namespace TempoTracker
             this.timerStopButton.Enabled = false;
             this.timerStopButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.timerStopButton.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.timerStopButton.Image = global::TempoTracker.Properties.Resources.control_stop;
             this.timerStopButton.Location = new System.Drawing.Point(278, 19);
             this.timerStopButton.Name = "timerStopButton";
             this.timerStopButton.Size = new System.Drawing.Size(36, 36);
@@ -299,6 +301,7 @@ namespace TempoTracker
             this.Controls.Add(this.projectsComboBox);
             this.Controls.Add(this.refreshButton);
             this.Controls.Add(this.timerEntryGroupBox);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(400, 292);
             this.Name = "MainForm";
             this.Text = "Tempo Tracker";
