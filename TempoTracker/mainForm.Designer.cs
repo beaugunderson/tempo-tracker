@@ -116,7 +116,7 @@ namespace TempoTracker
             this.timerStopButton.Enabled = false;
             this.timerStopButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.timerStopButton.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.timerStopButton.Image = global::TempoTracker.Properties.Resources.control_stop;
+            this.timerStopButton.Image = global::TempoTracker.Resources.Images.control_stop;
             this.timerStopButton.Location = new System.Drawing.Point(241, 19);
             this.timerStopButton.Name = "timerStopButton";
             this.timerStopButton.Size = new System.Drawing.Size(36, 36);
@@ -129,7 +129,7 @@ namespace TempoTracker
             this.timerPlayPauseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.timerPlayPauseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.timerPlayPauseButton.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.timerPlayPauseButton.Image = global::TempoTracker.Properties.Resources.control_play;
+            this.timerPlayPauseButton.Image = global::TempoTracker.Resources.Images.control_play;
             this.timerPlayPauseButton.Location = new System.Drawing.Point(199, 19);
             this.timerPlayPauseButton.Name = "timerPlayPauseButton";
             this.timerPlayPauseButton.Size = new System.Drawing.Size(36, 36);

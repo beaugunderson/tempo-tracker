@@ -1,2 +1,5 @@
 /*.pfx
 /*.csproj.user
+/bin/
+/obj/
+/TempoTracker.csproj.ReSharper.user

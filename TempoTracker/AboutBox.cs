@@ -13,7 +13,7 @@ namespace TempoTracker
 
         #region Assembly Attribute Accessors
 
-        public string AssemblyTitle
+        private string AssemblyTitle
         {
             get
             {
@@ -21,7 +21,7 @@ namespace TempoTracker
                 
                 if (attributes.Length > 0)
                 {
-                    AssemblyTitleAttribute titleAttribute = (AssemblyTitleAttribute)attributes[0];
+                    var titleAttribute = (AssemblyTitleAttribute)attributes[0];
                     
                     if (titleAttribute.Title != string.Empty)
                     {
@@ -33,7 +33,7 @@ namespace TempoTracker
             }
         }
 
-        public string AssemblyVersion
+        private string AssemblyVersion
         {
             get
             {
@@ -41,7 +41,7 @@ namespace TempoTracker
             }
         }
 
-        public string AssemblyDescription
+        private string AssemblyDescription
         {
             get
             {
@@ -51,7 +51,7 @@ namespace TempoTracker
             }
         }
 
-        public string AssemblyProduct
+        private string AssemblyProduct
         {
             get
             {
@@ -61,7 +61,7 @@ namespace TempoTracker
             }
         }
 
-        public string AssemblyCopyright
+        private string AssemblyCopyright
         {
             get
             {
@@ -71,7 +71,7 @@ namespace TempoTracker
             }
         }
 
-        public string AssemblyCompany
+        private string AssemblyCompany
         {
             get
             {
