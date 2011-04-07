@@ -13,18 +13,21 @@ namespace TempoTracker
     public partial class MainForm : Form
     {
         #region Locals
+
         private const string API_URL = "https://app.keeptempo.com";
+        private int _balloonTipCount;
 
         private TimeSpan _elapsed;
         private string _password;
 
         private bool _paused;
-        private int _balloonTipCount;
         private DateTime _start;
         private string _username;
+
         #endregion
 
         #region Properties
+
         public TimeSpan Modifier { get; set; }
         public DateTime Date { get; set; }
         public bool WarnOnEmptyNotesOption { get; set; }
@@ -32,6 +35,7 @@ namespace TempoTracker
         public bool ShowInTaskbarOption { get; set; }
         public bool ResetProjectOnSubmitOption { get; set; }
         public bool DisplayTimeHoursMinutesOption { get; set; }
+
         #endregion
 
         public MainForm()
@@ -49,13 +53,13 @@ namespace TempoTracker
             projectsComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
-        private bool createEvent(decimal hours, string notes, DateTime dateTime, int id)
+        private bool createEvent(decimal hours, string notes, DateTime dateTime, int id, string tags)
         {
-            string eventXml = string.Format("<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry><hours>{0:N2}</hours><notes>{1:S}</notes><project-id>{2:G}</project-id><occurred-on>{3:s}</occurred-on></entry>", hours, notes, id, dateTime);
+            string eventXml = string.Format("<?xml version=\"1.0\" encoding=\"UTF-8\"?><entry><hours>{0:N2}</hours><notes>{1:S}</notes><project-id>{2:G}</project-id><occurred-on>{3:s}</occurred-on><tag-s>{4}</tag-s></entry>", hours, notes, id, dateTime, tags);
 
             string url = string.Format("{0}/entries", API_URL);
 
-            var webRequest = WebRequest.Create(url) as HttpWebRequest;
+            HttpWebRequest webRequest = (HttpWebRequest) WebRequest.Create(url);
 
             webRequest.AllowAutoRedirect = false;
             webRequest.UserAgent = "TempoTracker.NET";
@@ -64,19 +68,19 @@ namespace TempoTracker
             webRequest.Accept = "application/xml";
             webRequest.ContentType = "application/xml";
 
-            byte[] ByteData = Encoding.UTF8.GetBytes(eventXml);
+            byte[] byteData = Encoding.UTF8.GetBytes(eventXml);
 
-            webRequest.ContentLength = ByteData.Length;
+            webRequest.ContentLength = byteData.Length;
 
             using (Stream postStream = webRequest.GetRequestStream())
             {
-                postStream.Write(ByteData, 0, ByteData.Length);
+                postStream.Write(byteData, 0, byteData.Length);
             }
 
             try
             {
-                var webResponse = webRequest.GetResponse() as HttpWebResponse;
-                var streamReader = new StreamReader(webResponse.GetResponseStream());
+                HttpWebResponse webResponse = (HttpWebResponse) webRequest.GetResponse();
+                StreamReader streamReader = new StreamReader(webResponse.GetResponseStream());
 
                 try
                 {
@@ -113,9 +117,9 @@ namespace TempoTracker
 
         private void updateProjects()
         {
-            string url = string.Format("{0}/projects", API_URL);
+            string url = string.Format("{0}/projects.xml?per_page=1000", API_URL);
 
-            var webRequest = WebRequest.Create(url) as HttpWebRequest;
+            HttpWebRequest webRequest = (HttpWebRequest) WebRequest.Create(url);
 
             webRequest.AllowAutoRedirect = false;
             webRequest.UserAgent = "TempoTracker.NET";
@@ -124,8 +128,8 @@ namespace TempoTracker
             webRequest.Accept = "application/xml";
             webRequest.ContentType = "application/xml";
 
-            var webResponse = webRequest.GetResponse() as HttpWebResponse;
-            var streamReader = new StreamReader(webResponse.GetResponseStream());
+            HttpWebResponse webResponse = webRequest.GetResponse() as HttpWebResponse;
+            StreamReader streamReader = new StreamReader(webResponse.GetResponseStream());
 
             projectsComboBox.Items.Clear();
             projectsComboBox.Items.Add("Select project...");
@@ -169,7 +173,7 @@ namespace TempoTracker
 
             if (string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password))
             {
-                var optionsForm = new OptionsForm();
+                OptionsForm optionsForm = new OptionsForm();
 
                 if (optionsForm.ShowDialog(this) != DialogResult.OK)
                 {
@@ -179,11 +183,11 @@ namespace TempoTracker
                 readPreferences();
             }
 
-            ShowInTaskbarOption = Convert.ToBoolean((int)registryKey.GetValue("showInTaskbar", 1));
-            ShowTimeReminderOption = Convert.ToBoolean((int)registryKey.GetValue("showTimeReminder", 0));
-            WarnOnEmptyNotesOption = Convert.ToBoolean((int)registryKey.GetValue("warnOnEmptyNotes", 1));
-            ResetProjectOnSubmitOption = Convert.ToBoolean((int)registryKey.GetValue("resetProjectOnSubmit", 1));
-            DisplayTimeHoursMinutesOption = Convert.ToBoolean((int)registryKey.GetValue("displayTimeHoursMinutes", 1));
+            ShowInTaskbarOption = Convert.ToBoolean((int) registryKey.GetValue("showInTaskbar", 1));
+            ShowTimeReminderOption = Convert.ToBoolean((int) registryKey.GetValue("showTimeReminder", 0));
+            WarnOnEmptyNotesOption = Convert.ToBoolean((int) registryKey.GetValue("warnOnEmptyNotes", 1));
+            ResetProjectOnSubmitOption = Convert.ToBoolean((int) registryKey.GetValue("resetProjectOnSubmit", 1));
+            DisplayTimeHoursMinutesOption = Convert.ToBoolean((int) registryKey.GetValue("displayTimeHoursMinutes", 1));
 
             ShowInTaskbar = ShowInTaskbarOption;
         }
@@ -199,7 +203,7 @@ namespace TempoTracker
         {
             try
             {
-                byte[] entropy = { 0x01, 0x02, 0x03, 0x05, 0x07, 0x11 };
+                byte[] entropy = {0x01, 0x02, 0x03, 0x05, 0x07, 0x11};
                 byte[] protectedSecret = Convert.FromBase64String(registryKey.GetValue("password", string.Empty).ToString());
                 byte[] secret = ProtectedData.Unprotect(protectedSecret, entropy, DataProtectionScope.CurrentUser);
 
@@ -219,7 +223,7 @@ namespace TempoTracker
 
             timeLinkLabel.Text = DisplayTimeHoursMinutesOption ? regularFormatTime(_elapsed) : fuzzyFormatTime(_elapsed.TotalSeconds);
 
-            if (ShowTimeReminderOption && (int)_elapsed.TotalMinutes / 10 > _balloonTipCount)
+            if (ShowTimeReminderOption && (int) _elapsed.TotalMinutes/10 > _balloonTipCount)
             {
                 _balloonTipCount++;
 
@@ -236,10 +240,10 @@ namespace TempoTracker
 
             if (seconds < 3600)
             {
-                return string.Format("{0:N2} minutes", Math.Round(seconds / 60, 2));
+                return string.Format("{0:N2} minutes", Math.Round(seconds/60, 2));
             }
 
-            return string.Format("{0:N3} hours", Math.Round(seconds / 3600, 3));
+            return string.Format("{0:N3} hours", Math.Round(seconds/3600, 3));
         }
 
         private static string regularFormatTime(TimeSpan timeSpan)
@@ -256,9 +260,9 @@ namespace TempoTracker
                 return;
             }
 
-            var p = (Project)projectsComboBox.SelectedItem;
+            Project p = (Project) projectsComboBox.SelectedItem;
 
-            if (createEvent(hoursNumericUpDown.Value, notesTextBox.Text, manualEntryDateTimePicker.Value, p.Id))
+            if (createEvent(hoursNumericUpDown.Value, notesTextBox.Text.Trim(), manualEntryDateTimePicker.Value, p.Id, Tags.Text.Trim()))
             {
                 toolStripStatusLabel1.Text = "Successfully created the event.";
 
@@ -281,9 +285,7 @@ namespace TempoTracker
             {
                 if (string.IsNullOrEmpty(notesTextBox.Text))
                 {
-                    DialogResult dialogResult = MessageBox.Show(
-                            "Do you want to submit time without a note? It may be hard to remember what you worked on later!",
-                            "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult dialogResult = MessageBox.Show("Do you want to submit time without a note? It may be hard to remember what you worked on later!", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                     if (dialogResult == DialogResult.No)
                     {
@@ -298,7 +300,7 @@ namespace TempoTracker
                 status = false;
             }
 
-            if (Math.Round((Decimal)_elapsed.TotalHours, 2) == 0)
+            if (Math.Round((Decimal) _elapsed.TotalHours, 2) == 0)
             {
                 MessageBox.Show("Please make sure that you have entered a valid time in the hours field.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
 
@@ -316,10 +318,7 @@ namespace TempoTracker
             {
                 if (String.IsNullOrEmpty(notesTextBox.Text))
                 {
-                    DialogResult dialogResult =
-                        MessageBox.Show(
-                            "Do you want to submit time without a note? It may be hard to remember what you worked on later!",
-                            "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult dialogResult = MessageBox.Show("Do you want to submit time without a note? It may be hard to remember what you worked on later!", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                     if (dialogResult == DialogResult.No)
                     {
@@ -354,9 +353,9 @@ namespace TempoTracker
 
             sendTimerEntryButton.Enabled = false;
 
-            var project = (Project)projectsComboBox.SelectedItem;
+            Project project = (Project) projectsComboBox.SelectedItem;
 
-            if (createEvent(Math.Round((Decimal)_elapsed.TotalHours, 2), notesTextBox.Text, Date, project.Id))
+            if (createEvent(Math.Round((Decimal) _elapsed.TotalHours, 2), notesTextBox.Text.Trim(), Date, project.Id, Tags.Text.Trim()))
             {
                 toolStripStatusLabel1.Text = "Successfully created the event.";
 
@@ -379,7 +378,7 @@ namespace TempoTracker
 
         private void timeLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var dateTimeEditForm = new DateTimeEditForm(_elapsed, Date);
+            DateTimeEditForm dateTimeEditForm = new DateTimeEditForm(_elapsed, Date);
 
             if (dateTimeEditForm.ShowDialog(this) == DialogResult.OK)
             {
@@ -392,6 +391,9 @@ namespace TempoTracker
 
         private void timerPlayPauseButton_Click(object sender, EventArgs e)
         {
+            // Since the status message is never cleared as a temp fix clear it here
+            toolStripStatusLabel1.Text = "";
+
             // Pause button clicked while timer running
             if (taskTimer.Enabled)
             {
@@ -402,7 +404,7 @@ namespace TempoTracker
 
                 taskTimer.Enabled = false;
             }
-            // Play button clicked...
+                // Play button clicked...
             else
             {
                 // ... while paused
@@ -415,7 +417,7 @@ namespace TempoTracker
 
                     taskTimer.Enabled = true;
                 }
-                // ... to start the timer for the first time
+                    // ... to start the timer for the first time
                 else
                 {
                     _paused = false;
@@ -447,7 +449,7 @@ namespace TempoTracker
 
         private void optionsButton_Click(object sender, EventArgs e)
         {
-            var optionsForm1 = new OptionsForm();
+            OptionsForm optionsForm1 = new OptionsForm();
 
             if (optionsForm1.ShowDialog(this) == DialogResult.OK)
             {
@@ -457,7 +459,7 @@ namespace TempoTracker
 
         private void mainForm_DoubleClick(object sender, EventArgs e)
         {
-            var aboutBox = new AboutBox();
+            AboutBox aboutBox = new AboutBox();
 
             aboutBox.ShowDialog();
         }

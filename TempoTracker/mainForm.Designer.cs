@@ -51,20 +51,23 @@ namespace TempoTracker
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tempoTrackerNotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.optionsButton = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.Tags = new System.Windows.Forms.TextBox();
             this.timerEntryGroupBox.SuspendLayout();
             this.manualEntryGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.hoursNumericUpDown)).BeginInit();
             this.notesGroupBox.SuspendLayout();
             this.mainStatusStrip.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // refreshButton
             // 
             this.refreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.refreshButton.Location = new System.Drawing.Point(289, 10);
+            this.refreshButton.Location = new System.Drawing.Point(252, 10);
             this.refreshButton.Name = "refreshButton";
             this.refreshButton.Size = new System.Drawing.Size(60, 23);
-            this.refreshButton.TabIndex = 2;
+            this.refreshButton.TabIndex = 50;
             this.refreshButton.Text = "&Refresh";
             this.refreshButton.UseVisualStyleBackColor = true;
             this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
@@ -73,10 +76,13 @@ namespace TempoTracker
             // 
             this.projectsComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.projectsComboBox.DropDownHeight = 500;
+            this.projectsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.projectsComboBox.FormattingEnabled = true;
+            this.projectsComboBox.IntegralHeight = false;
             this.projectsComboBox.Location = new System.Drawing.Point(61, 12);
             this.projectsComboBox.Name = "projectsComboBox";
-            this.projectsComboBox.Size = new System.Drawing.Size(222, 21);
+            this.projectsComboBox.Size = new System.Drawing.Size(185, 21);
             this.projectsComboBox.TabIndex = 1;
             // 
             // label1
@@ -99,7 +105,7 @@ namespace TempoTracker
             this.timerEntryGroupBox.Controls.Add(this.timeLabel);
             this.timerEntryGroupBox.Location = new System.Drawing.Point(12, 41);
             this.timerEntryGroupBox.Name = "timerEntryGroupBox";
-            this.timerEntryGroupBox.Size = new System.Drawing.Size(401, 65);
+            this.timerEntryGroupBox.Size = new System.Drawing.Size(364, 65);
             this.timerEntryGroupBox.TabIndex = 4;
             this.timerEntryGroupBox.TabStop = false;
             this.timerEntryGroupBox.Text = "Timer Entry";
@@ -111,7 +117,7 @@ namespace TempoTracker
             this.timerStopButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.timerStopButton.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.timerStopButton.Image = global::TempoTracker.Properties.Resources.control_stop;
-            this.timerStopButton.Location = new System.Drawing.Point(278, 19);
+            this.timerStopButton.Location = new System.Drawing.Point(241, 19);
             this.timerStopButton.Name = "timerStopButton";
             this.timerStopButton.Size = new System.Drawing.Size(36, 36);
             this.timerStopButton.TabIndex = 3;
@@ -124,7 +130,7 @@ namespace TempoTracker
             this.timerPlayPauseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.timerPlayPauseButton.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.timerPlayPauseButton.Image = global::TempoTracker.Properties.Resources.control_play;
-            this.timerPlayPauseButton.Location = new System.Drawing.Point(236, 19);
+            this.timerPlayPauseButton.Location = new System.Drawing.Point(199, 19);
             this.timerPlayPauseButton.Name = "timerPlayPauseButton";
             this.timerPlayPauseButton.Size = new System.Drawing.Size(36, 36);
             this.timerPlayPauseButton.TabIndex = 2;
@@ -135,10 +141,10 @@ namespace TempoTracker
             // 
             this.sendTimerEntryButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.sendTimerEntryButton.Enabled = false;
-            this.sendTimerEntryButton.Location = new System.Drawing.Point(320, 19);
+            this.sendTimerEntryButton.Location = new System.Drawing.Point(283, 19);
             this.sendTimerEntryButton.Name = "sendTimerEntryButton";
             this.sendTimerEntryButton.Size = new System.Drawing.Size(75, 36);
-            this.sendTimerEntryButton.TabIndex = 4;
+            this.sendTimerEntryButton.TabIndex = 6;
             this.sendTimerEntryButton.Text = "Send Entry";
             this.sendTimerEntryButton.UseVisualStyleBackColor = true;
             this.sendTimerEntryButton.Click += new System.EventHandler(this.sendTimerEntryButton_Click);
@@ -172,8 +178,8 @@ namespace TempoTracker
             this.notesTextBox.Multiline = true;
             this.notesTextBox.Name = "notesTextBox";
             this.notesTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.notesTextBox.Size = new System.Drawing.Size(384, 67);
-            this.notesTextBox.TabIndex = 0;
+            this.notesTextBox.Size = new System.Drawing.Size(347, 54);
+            this.notesTextBox.TabIndex = 5;
             // 
             // taskTimer
             // 
@@ -188,9 +194,9 @@ namespace TempoTracker
             this.manualEntryGroupBox.Controls.Add(this.label3);
             this.manualEntryGroupBox.Controls.Add(this.hoursNumericUpDown);
             this.manualEntryGroupBox.Controls.Add(this.sendManualEntryButton);
-            this.manualEntryGroupBox.Location = new System.Drawing.Point(12, 210);
+            this.manualEntryGroupBox.Location = new System.Drawing.Point(12, 267);
             this.manualEntryGroupBox.Name = "manualEntryGroupBox";
-            this.manualEntryGroupBox.Size = new System.Drawing.Size(401, 56);
+            this.manualEntryGroupBox.Size = new System.Drawing.Size(364, 50);
             this.manualEntryGroupBox.TabIndex = 6;
             this.manualEntryGroupBox.TabStop = false;
             this.manualEntryGroupBox.Text = "Manual Entry";
@@ -236,7 +242,7 @@ namespace TempoTracker
             // sendManualEntryButton
             // 
             this.sendManualEntryButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.sendManualEntryButton.Location = new System.Drawing.Point(320, 18);
+            this.sendManualEntryButton.Location = new System.Drawing.Point(283, 18);
             this.sendManualEntryButton.Name = "sendManualEntryButton";
             this.sendManualEntryButton.Size = new System.Drawing.Size(75, 23);
             this.sendManualEntryButton.TabIndex = 3;
@@ -250,9 +256,9 @@ namespace TempoTracker
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.notesGroupBox.Controls.Add(this.notesTextBox);
-            this.notesGroupBox.Location = new System.Drawing.Point(12, 112);
+            this.notesGroupBox.Location = new System.Drawing.Point(12, 182);
             this.notesGroupBox.Name = "notesGroupBox";
-            this.notesGroupBox.Size = new System.Drawing.Size(401, 92);
+            this.notesGroupBox.Size = new System.Drawing.Size(364, 79);
             this.notesGroupBox.TabIndex = 5;
             this.notesGroupBox.TabStop = false;
             this.notesGroupBox.Text = "Notes";
@@ -261,9 +267,9 @@ namespace TempoTracker
             // 
             this.mainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.mainStatusStrip.Location = new System.Drawing.Point(0, 279);
+            this.mainStatusStrip.Location = new System.Drawing.Point(0, 336);
             this.mainStatusStrip.Name = "mainStatusStrip";
-            this.mainStatusStrip.Size = new System.Drawing.Size(425, 22);
+            this.mainStatusStrip.Size = new System.Drawing.Size(388, 22);
             this.mainStatusStrip.TabIndex = 6;
             // 
             // toolStripStatusLabel1
@@ -280,19 +286,42 @@ namespace TempoTracker
             // optionsButton
             // 
             this.optionsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.optionsButton.Location = new System.Drawing.Point(355, 10);
+            this.optionsButton.Location = new System.Drawing.Point(318, 10);
             this.optionsButton.Name = "optionsButton";
             this.optionsButton.Size = new System.Drawing.Size(58, 23);
-            this.optionsButton.TabIndex = 3;
+            this.optionsButton.TabIndex = 50;
             this.optionsButton.Text = "&Options";
             this.optionsButton.UseVisualStyleBackColor = true;
             this.optionsButton.Click += new System.EventHandler(this.optionsButton_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.Tags);
+            this.groupBox1.Location = new System.Drawing.Point(15, 114);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(364, 46);
+            this.groupBox1.TabIndex = 4;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Tags";
+            // 
+            // Tags
+            // 
+            this.Tags.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.Tags.Location = new System.Drawing.Point(9, 19);
+            this.Tags.Name = "Tags";
+            this.Tags.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.Tags.Size = new System.Drawing.Size(347, 20);
+            this.Tags.TabIndex = 4;
+            // 
             // MainForm
             // 
+            this.AcceptButton = this.sendTimerEntryButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(425, 301);
+            this.ClientSize = new System.Drawing.Size(388, 358);
             this.Controls.Add(this.optionsButton);
             this.Controls.Add(this.mainStatusStrip);
             this.Controls.Add(this.notesGroupBox);
@@ -301,6 +330,7 @@ namespace TempoTracker
             this.Controls.Add(this.projectsComboBox);
             this.Controls.Add(this.refreshButton);
             this.Controls.Add(this.timerEntryGroupBox);
+            this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(400, 292);
             this.Name = "MainForm";
@@ -317,6 +347,8 @@ namespace TempoTracker
             this.notesGroupBox.PerformLayout();
             this.mainStatusStrip.ResumeLayout(false);
             this.mainStatusStrip.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -345,6 +377,8 @@ namespace TempoTracker
         private System.Windows.Forms.Button sendTimerEntryButton;
         private System.Windows.Forms.DateTimePicker manualEntryDateTimePicker;
         private System.Windows.Forms.Button optionsButton;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TextBox Tags;
     }
 }
 
