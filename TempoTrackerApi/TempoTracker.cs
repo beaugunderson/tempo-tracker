@@ -27,7 +27,7 @@ namespace TempoTrackerApi
         {
             var projects = new Collection<Project>();
 
-            var reader = CreateReader(string.Format("{0}/projects.xml?per_page=1000", ApiUrl));
+            var reader = CreateReader(string.Format("{0}/projects?per_page=1000", ApiUrl));
 
             while (reader.Read())
             {

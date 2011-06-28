@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
@@ -108,6 +109,13 @@ namespace TempoTracker
 
         private void mainForm_Shown(object sender, EventArgs e)
         {
+            // Check to see if previously saved windows position exists, if so, move the form.
+            if (Properties.Settings.Default.MainWindowXY.X != 0 && Properties.Settings.Default.MainWindowXY.Y != 0)
+            {
+                this.Location = Properties.Settings.Default.MainWindowXY;
+            }
+
+
             ReadPreferences();
 
             UpdateProjects();
@@ -383,6 +391,15 @@ namespace TempoTracker
         private void tempoTrackerNotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             Visible = !Visible;
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Save current X/Y position
+            Properties.Settings.Default.MainWindowXY = new Point(this.Location.X, this.Location.Y);
+            Properties.Settings.Default.Save();
+
+
         }
     }
 }

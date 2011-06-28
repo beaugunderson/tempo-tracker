@@ -17,10 +17,52 @@ namespace TempoTracker
             InitializeComponent();
         }
 
+
+        /// <exception cref="Exception">Unable to read registry key.</exception>
+        private void optionsForm_Load(object sender, EventArgs e)
+        {
+            var registryKey = Application.UserAppDataRegistry;
+
+            if (registryKey == null)
+            {
+                throw new Exception("Unable to read registry key.");
+            }
+
+            usernameTextBox.Text = registryKey.GetValue("username", string.Empty).ToString();
+
+            var mainForm = (MainForm)Owner;
+
+            showInTaskbarCheckBox.Checked = mainForm.ShowInTaskbarOption;
+            showTimeReminderCheckBox.Checked = mainForm.ShowTimeReminderOption;
+            warnOnEmptyNotesCheckBox.Checked = mainForm.WarnOnEmptyNotesOption;
+            resetProjectOnSubmitCheckBox.Checked = mainForm.ResetProjectOnSubmitOption;
+            displayTimeHoursMinutesCheckbox.Checked = mainForm.DisplayTimeHoursMinutesOption;
+
+
+            // Load settings
+            if (Properties.Settings.Default.ServiceAPI != null)
+            {
+                // Set chosen Service and enable form
+                cbServiceAPI.SelectedItem = Properties.Settings.Default.ServiceAPI;
+                enableSettings(sender, e);
+            }
+        }
+
+        private void enableSettings(object sender, EventArgs e)
+        {
+            // If a Service API is selected, then enable the form
+            if (cbServiceAPI.SelectedIndex < 0) return;
+            btnUnlock.Enabled = true;
+            groupOptions.Enabled = true;
+            usernameTextBox.Enabled = true;
+            passwordTextBox.Enabled = true;
+        }
+
+
         /// <exception cref="Exception">Unable to read registry key.</exception>
         private void saveButton_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(usernameTextBox.Text) && !string.IsNullOrEmpty(passwordTextBox.Text))
+            if (!string.IsNullOrEmpty(usernameTextBox.Text) && !string.IsNullOrEmpty(passwordTextBox.Text) && cbServiceAPI.SelectedIndex > 0)
             {
                 var registryKey = Application.UserAppDataRegistry;
 
@@ -46,40 +88,30 @@ namespace TempoTracker
 
                 DialogResult = DialogResult.OK;
 
+                // Save chosen Service API
+                Properties.Settings.Default.ServiceAPI = cbServiceAPI.SelectedItem.ToString();
+                Properties.Settings.Default.Save();
+
                 Close();
             }
             else
             {
-                MessageBox.Show("Please enter a username and password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("Please enter a username and password and select an API.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
         }
 
-        /// <exception cref="Exception">Unable to read registry key.</exception>
-        private void optionsForm_Load(object sender, EventArgs e)
-        {
-            var registryKey = Application.UserAppDataRegistry;
 
-            if (registryKey == null)
-            {
-                throw new Exception("Unable to read registry key.");
-            }
-
-            usernameTextBox.Text = registryKey.GetValue("username", string.Empty).ToString();
-
-            var mainForm = (MainForm)Owner;
-
-            showInTaskbarCheckBox.Checked = mainForm.ShowInTaskbarOption;
-            showTimeReminderCheckBox.Checked = mainForm.ShowTimeReminderOption;
-            warnOnEmptyNotesCheckBox.Checked = mainForm.WarnOnEmptyNotesOption;
-            resetProjectOnSubmitCheckBox.Checked = mainForm.ResetProjectOnSubmitOption;
-            displayTimeHoursMinutesCheckbox.Checked = mainForm.DisplayTimeHoursMinutesOption;
-        }
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
 
             Close();
+        }
+
+        private void btnUnlock_Click(object sender, EventArgs e)
+        {
+            tbCustomAPI_URL.Enabled = !tbCustomAPI_URL.Enabled;
         }
     }
 }

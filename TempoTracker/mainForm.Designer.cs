@@ -335,6 +335,7 @@ namespace TempoTracker
             this.MinimumSize = new System.Drawing.Size(400, 292);
             this.Name = "MainForm";
             this.Text = "Tempo Tracker";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.mainForm_Load);
             this.Shown += new System.EventHandler(this.mainForm_Shown);
             this.DoubleClick += new System.EventHandler(this.mainForm_DoubleClick);
