@@ -7,7 +7,21 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TempoTrackerSetup", "TempoT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TempoTrackerApi", "TempoTrackerApi\TempoTrackerApi.csproj", "{4990974C-0161-4971-BF2B-6C3F960BCB9F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TempoTrackerApiTests", "TempoTrackerApiTests\TempoTrackerApiTests.csproj", "{3585750F-AC54-4213-9F8B-E29A0C6B5D58}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0A6D38EB-A4AC-46BA-9891-22BEEA9A9A77}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		TempoTracker.vsmdi = TempoTracker.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestSharp", "RestSharp\RestSharp\RestSharp.csproj", "{2ECECFBF-5F3E-40EE-A963-72336DC7ABE2}"
+EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = TempoTracker.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -23,6 +37,14 @@ Global
 		{4990974C-0161-4971-BF2B-6C3F960BCB9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4990974C-0161-4971-BF2B-6C3F960BCB9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4990974C-0161-4971-BF2B-6C3F960BCB9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3585750F-AC54-4213-9F8B-E29A0C6B5D58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3585750F-AC54-4213-9F8B-E29A0C6B5D58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3585750F-AC54-4213-9F8B-E29A0C6B5D58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3585750F-AC54-4213-9F8B-E29A0C6B5D58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2ECECFBF-5F3E-40EE-A963-72336DC7ABE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2ECECFBF-5F3E-40EE-A963-72336DC7ABE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2ECECFBF-5F3E-40EE-A963-72336DC7ABE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2ECECFBF-5F3E-40EE-A963-72336DC7ABE2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

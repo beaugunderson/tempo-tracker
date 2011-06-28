@@ -200,6 +200,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RestSharp\RestSharp\RestSharp.csproj">
+      <Project>{2ECECFBF-5F3E-40EE-A963-72336DC7ABE2}</Project>
+      <Name>RestSharp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TempoTrackerApi\TempoTrackerApi.csproj">
       <Project>{4990974C-0161-4971-BF2B-6C3F960BCB9F}</Project>
       <Name>TempoTrackerApi</Name>

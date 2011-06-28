@@ -42,10 +42,10 @@ namespace TempoTracker
             this.showInTaskbarCheckBox = new System.Windows.Forms.CheckBox();
             this.resetProjectOnSubmitCheckBox = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.cbServiceAPI = new System.Windows.Forms.ComboBox();
+            this.serviceApiCheckBox = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.tbCustomAPI_URL = new System.Windows.Forms.TextBox();
-            this.btnUnlock = new System.Windows.Forms.Button();
+            this.customApiUrlTextBox = new System.Windows.Forms.TextBox();
+            this.unlockButton = new System.Windows.Forms.Button();
             this.groupOptions.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -71,7 +71,7 @@ namespace TempoTracker
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 88);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 13);
+            this.label1.Size = new System.Drawing.Size(58, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Username";
             // 
@@ -80,7 +80,7 @@ namespace TempoTracker
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 114);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 13);
+            this.label2.Size = new System.Drawing.Size(56, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "Password";
             // 
@@ -124,7 +124,7 @@ namespace TempoTracker
             this.displayTimeHoursMinutesCheckbox.AutoSize = true;
             this.displayTimeHoursMinutesCheckbox.Location = new System.Drawing.Point(12, 111);
             this.displayTimeHoursMinutesCheckbox.Name = "displayTimeHoursMinutesCheckbox";
-            this.displayTimeHoursMinutesCheckbox.Size = new System.Drawing.Size(182, 17);
+            this.displayTimeHoursMinutesCheckbox.Size = new System.Drawing.Size(191, 17);
             this.displayTimeHoursMinutesCheckbox.TabIndex = 3;
             this.displayTimeHoursMinutesCheckbox.Text = "Display time in HH:MM:SS format";
             this.displayTimeHoursMinutesCheckbox.UseVisualStyleBackColor = true;
@@ -134,7 +134,7 @@ namespace TempoTracker
             this.showTimeReminderCheckBox.AutoSize = true;
             this.showTimeReminderCheckBox.Location = new System.Drawing.Point(12, 88);
             this.showTimeReminderCheckBox.Name = "showTimeReminderCheckBox";
-            this.showTimeReminderCheckBox.Size = new System.Drawing.Size(201, 17);
+            this.showTimeReminderCheckBox.Size = new System.Drawing.Size(212, 17);
             this.showTimeReminderCheckBox.TabIndex = 3;
             this.showTimeReminderCheckBox.Text = "Show time reminder every 10 minutes";
             this.showTimeReminderCheckBox.UseVisualStyleBackColor = true;
@@ -144,7 +144,7 @@ namespace TempoTracker
             this.warnOnEmptyNotesCheckBox.AutoSize = true;
             this.warnOnEmptyNotesCheckBox.Location = new System.Drawing.Point(12, 19);
             this.warnOnEmptyNotesCheckBox.Name = "warnOnEmptyNotesCheckBox";
-            this.warnOnEmptyNotesCheckBox.Size = new System.Drawing.Size(149, 17);
+            this.warnOnEmptyNotesCheckBox.Size = new System.Drawing.Size(154, 17);
             this.warnOnEmptyNotesCheckBox.TabIndex = 0;
             this.warnOnEmptyNotesCheckBox.Text = "Warn on empty notes field";
             this.warnOnEmptyNotesCheckBox.UseVisualStyleBackColor = true;
@@ -154,7 +154,7 @@ namespace TempoTracker
             this.showInTaskbarCheckBox.AutoSize = true;
             this.showInTaskbarCheckBox.Location = new System.Drawing.Point(12, 65);
             this.showInTaskbarCheckBox.Name = "showInTaskbarCheckBox";
-            this.showInTaskbarCheckBox.Size = new System.Drawing.Size(102, 17);
+            this.showInTaskbarCheckBox.Size = new System.Drawing.Size(105, 17);
             this.showInTaskbarCheckBox.TabIndex = 2;
             this.showInTaskbarCheckBox.Text = "Show in taskbar";
             this.showInTaskbarCheckBox.UseVisualStyleBackColor = true;
@@ -164,7 +164,7 @@ namespace TempoTracker
             this.resetProjectOnSubmitCheckBox.AutoSize = true;
             this.resetProjectOnSubmitCheckBox.Location = new System.Drawing.Point(12, 42);
             this.resetProjectOnSubmitCheckBox.Name = "resetProjectOnSubmitCheckBox";
-            this.resetProjectOnSubmitCheckBox.Size = new System.Drawing.Size(158, 17);
+            this.resetProjectOnSubmitCheckBox.Size = new System.Drawing.Size(167, 17);
             this.resetProjectOnSubmitCheckBox.TabIndex = 1;
             this.resetProjectOnSubmitCheckBox.Text = "Reset project on submission";
             this.resetProjectOnSubmitCheckBox.UseVisualStyleBackColor = true;
@@ -174,54 +174,54 @@ namespace TempoTracker
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(12, 9);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(43, 13);
+            this.label3.Size = new System.Drawing.Size(45, 13);
             this.label3.TabIndex = 7;
             this.label3.Text = "Service";
             // 
-            // cbServiceAPI
+            // serviceApiCheckBox
             // 
-            this.cbServiceAPI.FormattingEnabled = true;
-            this.cbServiceAPI.Items.AddRange(new object[] {
-            "Freshbooks (pending)",
+            this.serviceApiCheckBox.FormattingEnabled = true;
+            this.serviceApiCheckBox.Items.AddRange(new object[] {
+            "Select a time tracking service...",
             "Keep Tempo",
-            "RescueTime (pending)",
+            "Freshbooks (pending)",
+            "Freckle (pending)",
             "Klok (pending)"});
-            this.cbServiceAPI.Location = new System.Drawing.Point(74, 6);
-            this.cbServiceAPI.Name = "cbServiceAPI";
-            this.cbServiceAPI.Size = new System.Drawing.Size(212, 21);
-            this.cbServiceAPI.TabIndex = 8;
-            this.cbServiceAPI.Text = "...Select time tracking service";
-            this.cbServiceAPI.SelectedIndexChanged += new System.EventHandler(this.enableSettings);
-            this.cbServiceAPI.SelectedValueChanged += new System.EventHandler(this.enableSettings);
+            this.serviceApiCheckBox.Location = new System.Drawing.Point(74, 6);
+            this.serviceApiCheckBox.Name = "serviceApiCheckBox";
+            this.serviceApiCheckBox.Size = new System.Drawing.Size(212, 21);
+            this.serviceApiCheckBox.TabIndex = 8;
+            this.serviceApiCheckBox.SelectedIndexChanged += new System.EventHandler(this.enableSettings);
+            this.serviceApiCheckBox.SelectedValueChanged += new System.EventHandler(this.enableSettings);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(12, 32);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(38, 13);
+            this.label4.Size = new System.Drawing.Size(40, 13);
             this.label4.TabIndex = 9;
             this.label4.Text = "API url";
             // 
-            // tbCustomAPI_URL
+            // customApiUrlTextBox
             // 
-            this.tbCustomAPI_URL.Enabled = false;
-            this.tbCustomAPI_URL.Location = new System.Drawing.Point(74, 29);
-            this.tbCustomAPI_URL.Multiline = true;
-            this.tbCustomAPI_URL.Name = "tbCustomAPI_URL";
-            this.tbCustomAPI_URL.Size = new System.Drawing.Size(173, 32);
-            this.tbCustomAPI_URL.TabIndex = 10;
+            this.customApiUrlTextBox.Enabled = false;
+            this.customApiUrlTextBox.Location = new System.Drawing.Point(74, 29);
+            this.customApiUrlTextBox.Multiline = true;
+            this.customApiUrlTextBox.Name = "customApiUrlTextBox";
+            this.customApiUrlTextBox.Size = new System.Drawing.Size(173, 32);
+            this.customApiUrlTextBox.TabIndex = 10;
             // 
-            // btnUnlock
+            // unlockButton
             // 
-            this.btnUnlock.Enabled = false;
-            this.btnUnlock.Image = ((System.Drawing.Image)(resources.GetObject("btnUnlock.Image")));
-            this.btnUnlock.Location = new System.Drawing.Point(254, 27);
-            this.btnUnlock.Name = "btnUnlock";
-            this.btnUnlock.Size = new System.Drawing.Size(34, 34);
-            this.btnUnlock.TabIndex = 11;
-            this.btnUnlock.UseVisualStyleBackColor = true;
-            this.btnUnlock.Click += new System.EventHandler(this.btnUnlock_Click);
+            this.unlockButton.Enabled = false;
+            this.unlockButton.Image = ((System.Drawing.Image)(resources.GetObject("unlockButton.Image")));
+            this.unlockButton.Location = new System.Drawing.Point(254, 27);
+            this.unlockButton.Name = "unlockButton";
+            this.unlockButton.Size = new System.Drawing.Size(34, 34);
+            this.unlockButton.TabIndex = 11;
+            this.unlockButton.UseVisualStyleBackColor = true;
+            this.unlockButton.Click += new System.EventHandler(this.unlockButton_Click);
             // 
             // OptionsForm
             // 
@@ -231,10 +231,10 @@ namespace TempoTracker
             this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(298, 328);
             this.ControlBox = false;
-            this.Controls.Add(this.btnUnlock);
-            this.Controls.Add(this.tbCustomAPI_URL);
+            this.Controls.Add(this.unlockButton);
+            this.Controls.Add(this.customApiUrlTextBox);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.cbServiceAPI);
+            this.Controls.Add(this.serviceApiCheckBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.groupOptions);
             this.Controls.Add(this.cancelButton);
@@ -273,9 +273,9 @@ namespace TempoTracker
         private System.Windows.Forms.CheckBox showTimeReminderCheckBox;
         private System.Windows.Forms.CheckBox displayTimeHoursMinutesCheckbox;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox cbServiceAPI;
+        private System.Windows.Forms.ComboBox serviceApiCheckBox;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox tbCustomAPI_URL;
-        private System.Windows.Forms.Button btnUnlock;
+        private System.Windows.Forms.TextBox customApiUrlTextBox;
+        private System.Windows.Forms.Button unlockButton;
     }
 }

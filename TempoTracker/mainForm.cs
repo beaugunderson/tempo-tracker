@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Drawing;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
+
 using Microsoft.Win32;
+
 using TempoTrackerApi;
 
 namespace TempoTracker
@@ -60,7 +63,12 @@ namespace TempoTracker
             projectsComboBox.Items.Clear();
             projectsComboBox.Items.Add("Select project...");
 
-            var projects = _tempoTracker.GetEvents();
+            var projects = _tempoTracker.GetProjects();
+
+            if (projects == null)
+            {
+                return;
+            }
 
             foreach (var project in projects)
             {
@@ -84,7 +92,7 @@ namespace TempoTracker
             _username = registryKey.GetValue("username", string.Empty).ToString();
             _password = ReadPassword(registryKey);
 
-            _tempoTracker = new TempoTrackerApi.TempoTracker(ApiUrl, _username, _password);
+            _tempoTracker = new TempoTrackerApi.TempoTracker(_username, _password, ApiUrl);
 
             if (string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password))
             {
@@ -112,9 +120,8 @@ namespace TempoTracker
             // Check to see if previously saved windows position exists, if so, move the form.
             if (Properties.Settings.Default.MainWindowXY.X != 0 && Properties.Settings.Default.MainWindowXY.Y != 0)
             {
-                this.Location = Properties.Settings.Default.MainWindowXY;
+                Location = Properties.Settings.Default.MainWindowXY;
             }
-
 
             ReadPreferences();
 
@@ -184,7 +191,7 @@ namespace TempoTracker
 
             var project = (Project)projectsComboBox.SelectedItem;
 
-            if (_tempoTracker.CreateEvent(hoursNumericUpDown.Value, notesTextBox.Text.Trim(), manualEntryDateTimePicker.Value, project.Id, Tags.Text.Trim()))
+            if (_tempoTracker.CreateEntry(manualEntryDateTimePicker.Value, hoursNumericUpDown.Value, notesTextBox.Text.Trim(), project.Id, Tags.Text.Trim()).StatusCode == HttpStatusCode.Created)
             {
                 toolStripStatusLabel1.Text = Resources.Language.SuccessfullyCreateEvent;
 
@@ -278,7 +285,7 @@ namespace TempoTracker
 
             var project = (Project)projectsComboBox.SelectedItem;
 
-            if (_tempoTracker.CreateEvent(Math.Round((Decimal)_elapsed.TotalHours, 2), notesTextBox.Text.Trim(), Date, project.Id, Tags.Text.Trim()))
+            if (_tempoTracker.CreateEntry(Date, Math.Round((Decimal)_elapsed.TotalHours, 2), notesTextBox.Text.Trim(), project.Id, Tags.Text.Trim()).StatusCode == HttpStatusCode.Created)
             {
                 toolStripStatusLabel1.Text = Resources.Language.SuccessfullyCreateEvent;
 
@@ -396,10 +403,8 @@ namespace TempoTracker
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             // Save current X/Y position
-            Properties.Settings.Default.MainWindowXY = new Point(this.Location.X, this.Location.Y);
+            Properties.Settings.Default.MainWindowXY = new Point(Location.X, Location.Y);
             Properties.Settings.Default.Save();
-
-
         }
     }
 }

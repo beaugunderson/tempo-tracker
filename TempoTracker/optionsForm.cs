@@ -1,12 +1,9 @@
-#region Using directives
-
 using System;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
-using Microsoft.Win32;
 
-#endregion
+using Microsoft.Win32;
 
 namespace TempoTracker
 {
@@ -16,7 +13,6 @@ namespace TempoTracker
         {
             InitializeComponent();
         }
-
 
         /// <exception cref="Exception">Unable to read registry key.</exception>
         private void optionsForm_Load(object sender, EventArgs e)
@@ -38,12 +34,12 @@ namespace TempoTracker
             resetProjectOnSubmitCheckBox.Checked = mainForm.ResetProjectOnSubmitOption;
             displayTimeHoursMinutesCheckbox.Checked = mainForm.DisplayTimeHoursMinutesOption;
 
-
             // Load settings
             if (Properties.Settings.Default.ServiceAPI != null)
             {
                 // Set chosen Service and enable form
-                cbServiceAPI.SelectedItem = Properties.Settings.Default.ServiceAPI;
+                serviceApiCheckBox.SelectedItem = Properties.Settings.Default.ServiceAPI;
+                
                 enableSettings(sender, e);
             }
         }
@@ -51,18 +47,21 @@ namespace TempoTracker
         private void enableSettings(object sender, EventArgs e)
         {
             // If a Service API is selected, then enable the form
-            if (cbServiceAPI.SelectedIndex < 0) return;
-            btnUnlock.Enabled = true;
+            if (serviceApiCheckBox.SelectedIndex < 0)
+            {
+                return;
+            }
+
+            unlockButton.Enabled = true;
             groupOptions.Enabled = true;
             usernameTextBox.Enabled = true;
             passwordTextBox.Enabled = true;
         }
 
-
         /// <exception cref="Exception">Unable to read registry key.</exception>
         private void saveButton_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(usernameTextBox.Text) && !string.IsNullOrEmpty(passwordTextBox.Text) && cbServiceAPI.SelectedIndex > 0)
+            if (!string.IsNullOrEmpty(usernameTextBox.Text) && !string.IsNullOrEmpty(passwordTextBox.Text) && serviceApiCheckBox.SelectedIndex > 0)
             {
                 var registryKey = Application.UserAppDataRegistry;
 
@@ -89,7 +88,7 @@ namespace TempoTracker
                 DialogResult = DialogResult.OK;
 
                 // Save chosen Service API
-                Properties.Settings.Default.ServiceAPI = cbServiceAPI.SelectedItem.ToString();
+                Properties.Settings.Default.ServiceAPI = serviceApiCheckBox.SelectedItem.ToString();
                 Properties.Settings.Default.Save();
 
                 Close();
@@ -100,8 +99,6 @@ namespace TempoTracker
             }
         }
 
-
-
         private void cancelButton_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
@@ -109,9 +106,9 @@ namespace TempoTracker
             Close();
         }
 
-        private void btnUnlock_Click(object sender, EventArgs e)
+        private void unlockButton_Click(object sender, EventArgs e)
         {
-            tbCustomAPI_URL.Enabled = !tbCustomAPI_URL.Enabled;
+            customApiUrlTextBox.Enabled = !customApiUrlTextBox.Enabled;
         }
     }
 }
