@@ -1,12 +1,9 @@
-#region Using directives
-
 using System;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
-using Microsoft.Win32;
 
-#endregion
+using Microsoft.Win32;
 
 namespace TempoTracker
 {
@@ -18,9 +15,53 @@ namespace TempoTracker
         }
 
         /// <exception cref="Exception">Unable to read registry key.</exception>
+        private void optionsForm_Load(object sender, EventArgs e)
+        {
+            var registryKey = Application.UserAppDataRegistry;
+
+            if (registryKey == null)
+            {
+                throw new Exception("Unable to read registry key.");
+            }
+
+            usernameTextBox.Text = registryKey.GetValue("username", string.Empty).ToString();
+
+            var mainForm = (MainForm)Owner;
+
+            showInTaskbarCheckBox.Checked = mainForm.ShowInTaskbarOption;
+            showTimeReminderCheckBox.Checked = mainForm.ShowTimeReminderOption;
+            warnOnEmptyNotesCheckBox.Checked = mainForm.WarnOnEmptyNotesOption;
+            resetProjectOnSubmitCheckBox.Checked = mainForm.ResetProjectOnSubmitOption;
+            displayTimeHoursMinutesCheckbox.Checked = mainForm.DisplayTimeHoursMinutesOption;
+
+            // Load settings
+            if (Properties.Settings.Default.ServiceAPI != null)
+            {
+                // Set chosen Service and enable form
+                serviceApiCheckBox.SelectedItem = Properties.Settings.Default.ServiceAPI;
+                
+                enableSettings(sender, e);
+            }
+        }
+
+        private void enableSettings(object sender, EventArgs e)
+        {
+            // If a Service API is selected, then enable the form
+            if (serviceApiCheckBox.SelectedIndex < 0)
+            {
+                return;
+            }
+
+            unlockButton.Enabled = true;
+            groupOptions.Enabled = true;
+            usernameTextBox.Enabled = true;
+            passwordTextBox.Enabled = true;
+        }
+
+        /// <exception cref="Exception">Unable to read registry key.</exception>
         private void saveButton_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(usernameTextBox.Text) && !string.IsNullOrEmpty(passwordTextBox.Text))
+            if (!string.IsNullOrEmpty(usernameTextBox.Text) && !string.IsNullOrEmpty(passwordTextBox.Text) && serviceApiCheckBox.SelectedIndex > 0)
             {
                 var registryKey = Application.UserAppDataRegistry;
 
@@ -46,33 +87,16 @@ namespace TempoTracker
 
                 DialogResult = DialogResult.OK;
 
+                // Save chosen Service API
+                Properties.Settings.Default.ServiceAPI = serviceApiCheckBox.SelectedItem.ToString();
+                Properties.Settings.Default.Save();
+
                 Close();
             }
             else
             {
-                MessageBox.Show("Please enter a username and password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("Please enter a username and password and select an API.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
-        }
-
-        /// <exception cref="Exception">Unable to read registry key.</exception>
-        private void optionsForm_Load(object sender, EventArgs e)
-        {
-            var registryKey = Application.UserAppDataRegistry;
-
-            if (registryKey == null)
-            {
-                throw new Exception("Unable to read registry key.");
-            }
-
-            usernameTextBox.Text = registryKey.GetValue("username", string.Empty).ToString();
-
-            var mainForm = (MainForm)Owner;
-
-            showInTaskbarCheckBox.Checked = mainForm.ShowInTaskbarOption;
-            showTimeReminderCheckBox.Checked = mainForm.ShowTimeReminderOption;
-            warnOnEmptyNotesCheckBox.Checked = mainForm.WarnOnEmptyNotesOption;
-            resetProjectOnSubmitCheckBox.Checked = mainForm.ResetProjectOnSubmitOption;
-            displayTimeHoursMinutesCheckbox.Checked = mainForm.DisplayTimeHoursMinutesOption;
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -80,6 +104,11 @@ namespace TempoTracker
             DialogResult = DialogResult.Cancel;
 
             Close();
+        }
+
+        private void unlockButton_Click(object sender, EventArgs e)
+        {
+            customApiUrlTextBox.Enabled = !customApiUrlTextBox.Enabled;
         }
     }
 }

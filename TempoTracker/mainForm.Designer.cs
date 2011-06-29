@@ -64,7 +64,7 @@ namespace TempoTracker
             // refreshButton
             // 
             this.refreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.refreshButton.Location = new System.Drawing.Point(252, 10);
+            this.refreshButton.Location = new System.Drawing.Point(252, 11);
             this.refreshButton.Name = "refreshButton";
             this.refreshButton.Size = new System.Drawing.Size(60, 23);
             this.refreshButton.TabIndex = 50;
@@ -90,7 +90,7 @@ namespace TempoTracker
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 15);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 13);
+            this.label1.Size = new System.Drawing.Size(45, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Project:";
             // 
@@ -217,7 +217,7 @@ namespace TempoTracker
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(6, 23);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(38, 13);
+            this.label3.Size = new System.Drawing.Size(40, 13);
             this.label3.TabIndex = 0;
             this.label3.Text = "Hours:";
             // 
@@ -286,7 +286,7 @@ namespace TempoTracker
             // optionsButton
             // 
             this.optionsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.optionsButton.Location = new System.Drawing.Point(318, 10);
+            this.optionsButton.Location = new System.Drawing.Point(318, 11);
             this.optionsButton.Name = "optionsButton";
             this.optionsButton.Size = new System.Drawing.Size(58, 23);
             this.optionsButton.TabIndex = 50;
@@ -335,6 +335,7 @@ namespace TempoTracker
             this.MinimumSize = new System.Drawing.Size(400, 292);
             this.Name = "MainForm";
             this.Text = "Tempo Tracker";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.mainForm_Load);
             this.Shown += new System.EventHandler(this.mainForm_Shown);
             this.DoubleClick += new System.EventHandler(this.mainForm_DoubleClick);
