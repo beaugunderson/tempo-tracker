@@ -15,7 +15,7 @@ namespace TempoTracker
         }
 
         // Application settings object
-        Properties.Settings AppSettings = Properties.Settings.Default;
+        private readonly Properties.Settings AppSettings = Properties.Settings.Default;
 
         /// <exception cref="Exception">Unable to read registry key.</exception>
         private void optionsForm_Load(object sender, EventArgs e)
@@ -37,12 +37,11 @@ namespace TempoTracker
             resetProjectOnSubmitCheckBox.Checked = mainForm.ResetProjectOnSubmitOption;
             displayTimeHoursMinutesCheckbox.Checked = mainForm.DisplayTimeHoursMinutesOption;
 
-
             // Load API settings 
-            if (string.IsNullOrEmpty(AppSettings.ServiceAPI) == false)
+            if (string.IsNullOrEmpty(AppSettings.ServiceApi) == false)
             {
-                serviceApiCheckBox.SelectedItem = AppSettings.ServiceAPI;
-                apiURLTextBox.Text = AppSettings.apiCustom_URL;
+                serviceApiCheckBox.SelectedItem = AppSettings.ServiceApi;
+                apiUrlTextBox.Text = AppSettings.CustomApiUrl;
             }
         }
 
@@ -51,18 +50,16 @@ namespace TempoTracker
             switch (serviceApiCheckBox.SelectedItem.ToString())
                 {
                     case "Keep Tempo":
-                        apiURLTextBox.Text = AppSettings.apiKeepTempo;
+                        apiUrlTextBox.Text = AppSettings.apiKeepTempo;
                         break;
                     case "Freshbooks":
-                        apiURLTextBox.Text = AppSettings.apiFreshbooks;
+                        apiUrlTextBox.Text = AppSettings.apiFreshbooks;
                         break;
                     case "Freckle":
-                        apiURLTextBox.Text = AppSettings.apiFreckle;
+                        apiUrlTextBox.Text = AppSettings.apiFreckle;
                         break;
                     case "Klok":
-                        apiURLTextBox.Text = AppSettings.apiKlok;
-                        break;
-                    default:
+                        apiUrlTextBox.Text = AppSettings.apiKlok;
                         break;
                 }
          
@@ -73,21 +70,22 @@ namespace TempoTracker
                 usernameTextBox.Enabled = true;
                 passwordTextBox.Enabled = true; 
             }
-
         }
-
 
         private bool FormVerified()
         {
             if (string.IsNullOrEmpty(usernameTextBox.Text) || string.IsNullOrEmpty(passwordTextBox.Text) || serviceApiCheckBox.SelectedIndex < 0)
             {
                 MessageBox.Show("Please enter a username and password, and select an API", "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+
                 return false;
             } 
             
              // Verify the user has modified the custom api url
-            if (apiURLTextBox.Text == AppSettings.apiKeepTempo || apiURLTextBox.Text == AppSettings.apiFreckle
-                    || apiURLTextBox.Text == AppSettings.apiFreshbooks || apiURLTextBox.Text == AppSettings.apiKlok)
+            if (apiUrlTextBox.Text == AppSettings.apiKeepTempo ||
+                apiUrlTextBox.Text == AppSettings.apiFreckle ||
+                apiUrlTextBox.Text == AppSettings.apiFreshbooks || 
+                apiUrlTextBox.Text == AppSettings.apiKlok)
             {
                 MessageBox.Show("Please enter your custom API URL.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return false;
@@ -95,7 +93,6 @@ namespace TempoTracker
 
             // Verification succesful
             return true;
-
         }
 
         /// <exception cref="Exception">Unable to read registry key.</exception>
@@ -127,11 +124,10 @@ namespace TempoTracker
             registryKey.SetValue("displayTimeHoursMinutes", Convert.ToInt32(displayTimeHoursMinutesCheckbox.Checked), RegistryValueKind.DWord);
 
             DialogResult = DialogResult.OK;
-
                
             // Save Service API / Custom URL
-            AppSettings.ServiceAPI = serviceApiCheckBox.SelectedItem.ToString();
-            AppSettings.apiCustom_URL = apiURLTextBox.Text;
+            AppSettings.ServiceApi = serviceApiCheckBox.SelectedItem.ToString();
+            AppSettings.CustomApiUrl = apiUrlTextBox.Text;
             AppSettings.Save();
 
             Close();
@@ -146,9 +142,7 @@ namespace TempoTracker
 
         private void unlockButton_Click(object sender, EventArgs e)
         {
-            apiURLTextBox.Enabled = !apiURLTextBox.Enabled;
+            apiUrlTextBox.Enabled = !apiUrlTextBox.Enabled;
         }
-
-
     }
 }
