@@ -38,30 +38,30 @@ namespace TempoTracker.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string ServiceAPI {
+        public string ServiceApi {
             get {
-                return ((string)(this["ServiceAPI"]));
+                return ((string)(this["ServiceApi"]));
             }
             set {
-                this["ServiceAPI"] = value;
+                this["ServiceApi"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string apiCustom_URL {
+        public string CustomApiUrl {
             get {
-                return ((string)(this["apiCustom_URL"]));
+                return ((string)(this["CustomApiUrl"]));
             }
             set {
-                this["apiCustom_URL"] = value;
+                this["CustomApiUrl"] = value;
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://USERNAME.keeptempo.com/projects.xml?per_page=1000")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://USERNAME.keeptempo.com")]
         public string apiKeepTempo {
             get {
                 return ((string)(this["apiKeepTempo"]));

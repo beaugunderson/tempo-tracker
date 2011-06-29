@@ -7,6 +7,7 @@ using System.Windows.Forms;
 
 using Microsoft.Win32;
 
+using TempoTracker.Utilities;
 using TempoTrackerApi;
 
 namespace TempoTracker
@@ -70,9 +71,7 @@ namespace TempoTracker
 
             foreach (var project in projects)
             {
-                // FIX THIS AS IT DOESN'T WORK TO ADD ANY INFO TO THE PROJECTS
-                projectsComboBox.Items.Add(project.Name);
-                //projectsComboBox.Items.Add(project);
+                projectsComboBox.Items.Add(project);
             }
 
             projectsComboBox.SelectedIndex = projectsComboBox.Items.IndexOf("Select project...");
@@ -92,9 +91,9 @@ namespace TempoTracker
             _username = registryKey.GetValue("username", string.Empty).ToString();
             _password = ReadPassword(registryKey);
 
-            _tempoTracker = new TempoTrackerApi.TempoTracker(_username, _password, Properties.Settings.Default.apiCustom_URL);
+            _tempoTracker = new TempoTrackerApi.TempoTracker(_username, _password, Properties.Settings.Default.CustomApiUrl);
 
-            if (string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password) || string.IsNullOrEmpty(Properties.Settings.Default.apiCustom_URL))
+            if (string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password) || string.IsNullOrEmpty(Properties.Settings.Default.CustomApiUrl))
             {
                 var optionsForm = new OptionsForm();
 
@@ -150,36 +149,14 @@ namespace TempoTracker
         {
             _elapsed = (DateTime.Now - _start) + Modifier;
 
-            timeLinkLabel.Text = DisplayTimeHoursMinutesOption ? RegularFormatTime(_elapsed) : FuzzyFormatTime(_elapsed.TotalSeconds);
+            timeLinkLabel.Text = DisplayTimeHoursMinutesOption ? Time.Format(_elapsed) : Time.FuzzyFormat(_elapsed.TotalSeconds);
 
             if (ShowTimeReminderOption && (int)_elapsed.TotalMinutes / 10 > _balloonTipCount)
             {
                 _balloonTipCount++;
 
-                tempoTrackerNotifyIcon.ShowBalloonTip(5000, "Time update", string.Format("You've now worked {0}.", RegularFormatTime(_elapsed)), ToolTipIcon.Info);
+                tempoTrackerNotifyIcon.ShowBalloonTip(5000, "Time update", string.Format("You've now worked {0}.", Time.Format(_elapsed)), ToolTipIcon.Info);
             }
-        }
-
-        private static string FuzzyFormatTime(double seconds)
-        {
-            if (seconds < 60)
-            {
-                return string.Format("{0:N0} seconds", Math.Round(seconds, 0));
-            }
-
-            if (seconds < 3600)
-            {
-                return string.Format("{0:N2} minutes", Math.Round(seconds / 60, 2));
-            }
-
-            return string.Format("{0:N3} hours", Math.Round(seconds / 3600, 3));
-        }
-
-        private static string RegularFormatTime(TimeSpan timeSpan)
-        {
-            DateTime dateTime = DateTime.MinValue.Add(timeSpan);
-
-            return dateTime.ToString("H:mm:ss");
         }
 
         private void sendManualEntryButton_Click(object sender, EventArgs e)
