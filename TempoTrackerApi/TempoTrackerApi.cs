@@ -81,9 +81,11 @@ namespace TempoTrackerApi
         public IEnumerable<Project> GetProjects()
         {
             var request = new RestRequest
-            {
-                Resource = "projects"
-            };
+                              {
+                                  Resource = "projects",
+                                  
+                                  
+                                };
 
             return Execute<List<Project>>(request);
         }

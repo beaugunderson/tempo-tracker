@@ -34,6 +34,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="RestSharp">
+      <HintPath>..\TempoTrackerApi\Dependencies\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -49,10 +52,6 @@
     <Compile Include="TestTempoTrackerApi.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RestSharp\RestSharp\RestSharp.csproj">
-      <Project>{2ECECFBF-5F3E-40EE-A963-72336DC7ABE2}</Project>
-      <Name>RestSharp</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TempoTrackerApi\TempoTrackerApi.csproj">
       <Project>{4990974C-0161-4971-BF2B-6C3F960BCB9F}</Project>
       <Name>TempoTrackerApi</Name>

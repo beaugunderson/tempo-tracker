@@ -25,9 +25,7 @@ namespace TempoTracker
         private string _username;
 
         private TempoTrackerApi.TempoTracker _tempoTracker;
-
-        private const string ApiUrl = "https://app.keeptempo.com";
-
+        
         #endregion
 
         #region Properties
@@ -72,7 +70,9 @@ namespace TempoTracker
 
             foreach (var project in projects)
             {
-                projectsComboBox.Items.Add(project);
+                // FIX THIS AS IT DOESN'T WORK TO ADD ANY INFO TO THE PROJECTS
+                projectsComboBox.Items.Add(project.Name);
+                //projectsComboBox.Items.Add(project);
             }
 
             projectsComboBox.SelectedIndex = projectsComboBox.Items.IndexOf("Select project...");
@@ -92,15 +92,15 @@ namespace TempoTracker
             _username = registryKey.GetValue("username", string.Empty).ToString();
             _password = ReadPassword(registryKey);
 
-            _tempoTracker = new TempoTrackerApi.TempoTracker(_username, _password, ApiUrl);
+            _tempoTracker = new TempoTrackerApi.TempoTracker(_username, _password, Properties.Settings.Default.apiCustom_URL);
 
-            if (string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password))
+            if (string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password) || string.IsNullOrEmpty(Properties.Settings.Default.apiCustom_URL))
             {
                 var optionsForm = new OptionsForm();
 
                 if (optionsForm.ShowDialog(this) != DialogResult.OK)
                 {
-                    MessageBox.Show("You must set a username and password to continue.", Resources.Language.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Please configure API information.", Resources.Language.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
                 ReadPreferences();
@@ -230,9 +230,9 @@ namespace TempoTracker
                 status = false;
             }
 
-            if (Math.Round((Decimal)_elapsed.TotalHours, 2) == 0)
+            if (_elapsed.Minutes < 1)
             {
-                MessageBox.Show("Please make sure that you have entered a valid time in the hours field.", Resources.Language.Error, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("Please make sure you've completed at least 1 minute of work.", Resources.Language.Error, MessageBoxButtons.OK, MessageBoxIcon.Stop);
 
                 status = false;
             }

@@ -50,12 +50,48 @@ namespace TempoTracker.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string CustomAPI_URL {
+        public string apiCustom_URL {
             get {
-                return ((string)(this["CustomAPI_URL"]));
+                return ((string)(this["apiCustom_URL"]));
             }
             set {
-                this["CustomAPI_URL"] = value;
+                this["apiCustom_URL"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://USERNAME.keeptempo.com/projects.xml?per_page=1000")]
+        public string apiKeepTempo {
+            get {
+                return ((string)(this["apiKeepTempo"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Not yet supported")]
+        public string apiFreshbooks {
+            get {
+                return ((string)(this["apiFreshbooks"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Not yet supported")]
+        public string apiFreckle {
+            get {
+                return ((string)(this["apiFreckle"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Not yet supported")]
+        public string apiKlok {
+            get {
+                return ((string)(this["apiKlok"]));
             }
         }
     }

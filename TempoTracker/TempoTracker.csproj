@@ -37,9 +37,11 @@
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>http://jessegunderson.com/keeptempo/</InstallUrl>
     <UpdateUrl>http://jessegunderson.com/keeptempo/</UpdateUrl>
+    <SupportUrl>http://jessegunderson.com/keeptempo/changelog.htm</SupportUrl>
+    <ErrorReportUrl>http://jessegunderson.com/keeptempo/changelog.htm</ErrorReportUrl>
     <ProductName>Tempo Tracker</ProductName>
     <PublisherName>Gunderson Project</PublisherName>
-    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationRevision>5</ApplicationRevision>
     <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -64,6 +66,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="RestSharp">
+      <HintPath>..\TempoTrackerApi\Dependencies\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -200,10 +205,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RestSharp\RestSharp\RestSharp.csproj">
-      <Project>{2ECECFBF-5F3E-40EE-A963-72336DC7ABE2}</Project>
-      <Name>RestSharp</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TempoTrackerApi\TempoTrackerApi.csproj">
       <Project>{4990974C-0161-4971-BF2B-6C3F960BCB9F}</Project>
       <Name>TempoTrackerApi</Name>

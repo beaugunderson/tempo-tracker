@@ -1,0 +1,19 @@
+Change Log:
+
+Version 1.1.1.0.5
+Released 06/28/11
+
+New Features:
+1. Updated backend API for ease of adding additional services later
+
+
+
+Version 1.1.1.0.5
+Released 06/27/11
+
+New Features:
+1. Window position is now saved.
+2. Added drop down to select different API's (not yet functional)
+3. Cleaned up Options form for better usability and focusing user on gui elements in play
+4. Added custom API url that auto-fills with the base API url
+5. Added remote program updates on launch
