@@ -31,12 +31,18 @@ namespace TempoTracker
 
             var mainForm = (MainForm)Owner;
 
+            
             showInTaskbarCheckBox.Checked = mainForm.ShowInTaskbarOption;
             showTimeReminderCheckBox.Checked = mainForm.ShowTimeReminderOption;
             warnOnEmptyNotesCheckBox.Checked = mainForm.WarnOnEmptyNotesOption;
             resetProjectOnSubmitCheckBox.Checked = mainForm.ResetProjectOnSubmitOption;
             displayTimeHoursMinutesCheckbox.Checked = mainForm.DisplayTimeHoursMinutesOption;
+            showNotifyIconCheckBox.Checked = AppSettings.notifyShow;
+            minimizeToTrayCheckBox.Enabled = AppSettings.notifyShow;
+            minimizeToTrayCheckBox.Checked = AppSettings.notifyMinimize;
 
+            
+            
             // Load API settings 
             if (string.IsNullOrEmpty(AppSettings.ServiceApi) == false)
             {
@@ -117,11 +123,15 @@ namespace TempoTracker
 
             registryKey.SetValue("password", Convert.ToBase64String(protectedSecret, Base64FormattingOptions.None), RegistryValueKind.String);
 
+
+            // Save preferences
             registryKey.SetValue("showInTaskbar", Convert.ToInt32(showInTaskbarCheckBox.Checked), RegistryValueKind.DWord);
             registryKey.SetValue("showTimeReminder", Convert.ToInt32(showTimeReminderCheckBox.Checked), RegistryValueKind.DWord);
             registryKey.SetValue("warnOnEmptyNotes", Convert.ToInt32(warnOnEmptyNotesCheckBox.Checked), RegistryValueKind.DWord);
             registryKey.SetValue("resetProjectOnSubmit", Convert.ToInt32(resetProjectOnSubmitCheckBox.Checked), RegistryValueKind.DWord);
             registryKey.SetValue("displayTimeHoursMinutes", Convert.ToInt32(displayTimeHoursMinutesCheckbox.Checked), RegistryValueKind.DWord);
+            AppSettings.notifyShow = showNotifyIconCheckBox.Checked;
+            AppSettings.notifyMinimize = minimizeToTrayCheckBox.Checked;
 
             DialogResult = DialogResult.OK;
                
@@ -143,6 +153,20 @@ namespace TempoTracker
         private void unlockButton_Click(object sender, EventArgs e)
         {
             apiUrlTextBox.Enabled = !apiUrlTextBox.Enabled;
+        }
+
+
+        private void notifyIconSanitation(object sender, EventArgs e)
+        {
+            // Do not allow the user to minimize application to try but hide the tray icon
+            if (!showNotifyIconCheckBox.Checked)
+            {
+                minimizeToTrayCheckBox.Checked = false;
+                minimizeToTrayCheckBox.Enabled = false;
+            } else
+            {
+                minimizeToTrayCheckBox.Enabled = true;
+            }
         }
     }
 }

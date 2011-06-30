@@ -94,5 +94,29 @@ namespace TempoTracker.Properties {
                 return ((string)(this["apiKlok"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool notifyShow {
+            get {
+                return ((bool)(this["notifyShow"]));
+            }
+            set {
+                this["notifyShow"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool notifyMinimize {
+            get {
+                return ((bool)(this["notifyMinimize"]));
+            }
+            set {
+                this["notifyMinimize"] = value;
+            }
+        }
     }
 }

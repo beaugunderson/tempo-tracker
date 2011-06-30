@@ -12,8 +12,7 @@
     <AssemblyName>TempoTracker</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>glossyclock.ico</ApplicationIcon>
     <IsWebBootstrapper>true</IsWebBootstrapper>
     <ManifestCertificateThumbprint>A4D479CE4C064676311ACB6C303D98E24CFD80FD</ManifestCertificateThumbprint>
     <ManifestKeyFile>TempoTracker_TemporaryKey.pfx</ManifestKeyFile>
@@ -42,7 +41,7 @@
     <ProductName>Tempo Tracker</ProductName>
     <PublisherName>Gunderson Project</PublisherName>
     <ApplicationRevision>5</ApplicationRevision>
-    <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
+    <ApplicationVersion>1.2.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -64,6 +63,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="RestSharp">
@@ -210,6 +210,9 @@
       <Project>{4990974C-0161-4971-BF2B-6C3F960BCB9F}</Project>
       <Name>TempoTrackerApi</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="glossyclock.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

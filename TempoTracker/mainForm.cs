@@ -26,6 +26,7 @@ namespace TempoTracker
         private string _username;
 
         private TempoTrackerApi.TempoTracker _tempoTracker;
+        private Properties.Settings AppSettings = Properties.Settings.Default;
         
         #endregion
 
@@ -80,7 +81,7 @@ namespace TempoTracker
         private void ReadPreferences()
         {
             var registryKey = Application.UserAppDataRegistry;
-
+            
             if (registryKey == null)
             {
                 MessageBox.Show("There was an error reading the user registry.", Resources.Language.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -112,14 +113,19 @@ namespace TempoTracker
             DisplayTimeHoursMinutesOption = Convert.ToBoolean((int)registryKey.GetValue("displayTimeHoursMinutes", 1));
 
             ShowInTaskbar = ShowInTaskbarOption;
+
+            // Handle notify icon preferences
+            tempoTrackerNotifyIcon.Visible = AppSettings.notifyShow;
+
+
         }
 
         private void mainForm_Shown(object sender, EventArgs e)
         {
             // Check to see if previously saved windows position exists, if so, move the form.
-            if (Properties.Settings.Default.MainWindowXY.X != 0 && Properties.Settings.Default.MainWindowXY.Y != 0)
+            if (AppSettings.MainWindowXY.X != 0 && AppSettings.MainWindowXY.Y != 0)
             {
-                Location = Properties.Settings.Default.MainWindowXY;
+                Location = AppSettings.MainWindowXY;
             }
 
             ReadPreferences();
@@ -171,11 +177,16 @@ namespace TempoTracker
             if (_tempoTracker.CreateEntry(manualEntryDateTimePicker.Value, hoursNumericUpDown.Value, notesTextBox.Text.Trim(), project.Id, Tags.Text.Trim()).StatusCode == HttpStatusCode.Created)
             {
                 toolStripStatusLabel1.Text = Resources.Language.SuccessfullyCreateEvent;
+                statusTimer.Enabled = true;
+
 
                 if (ResetProjectOnSubmitOption)
                 {
                     projectsComboBox.SelectedIndex = projectsComboBox.Items.IndexOf("Select project...");
                 }
+
+                // reset form for next submission
+                SanatizeForm();
             }
             else
             {
@@ -276,6 +287,10 @@ namespace TempoTracker
                 {
                     projectsComboBox.SelectedIndex = projectsComboBox.Items.IndexOf("Select project...");
                 }
+
+                // reset form for next submission
+                SanatizeForm();
+
             }
             else
             {
@@ -300,9 +315,6 @@ namespace TempoTracker
 
         private void timerPlayPauseButton_Click(object sender, EventArgs e)
         {
-            // Since the status message is never cleared as a temp fix clear it here
-            toolStripStatusLabel1.Text = "";
-
             // Pause button clicked while timer running
             if (taskTimer.Enabled)
             {
@@ -345,6 +357,16 @@ namespace TempoTracker
             }
         }
 
+
+        private void SanatizeForm()
+        {
+            // Reset form after submissions
+            Tags.Text = "";
+            notesTextBox.Text = "";
+            hoursNumericUpDown.Value = 0;
+
+        }
+
         private void timerStopButton_Click(object sender, EventArgs e)
         {
             _paused = false;
@@ -375,13 +397,29 @@ namespace TempoTracker
         private void tempoTrackerNotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             Visible = !Visible;
+            WindowState = FormWindowState.Normal;
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             // Save current X/Y position
-            Properties.Settings.Default.MainWindowXY = new Point(Location.X, Location.Y);
-            Properties.Settings.Default.Save();
+            AppSettings.MainWindowXY = new Point(Location.X, Location.Y);
+            AppSettings.Save();
+        }
+
+        private void statusTimer_Tick(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "";
+            statusTimer.Enabled = false;
+
+        }
+
+        private void MainForm_Resize(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized && AppSettings.notifyMinimize)
+            {
+                Visible = !Visible;
+            }
         }
     }
 }
