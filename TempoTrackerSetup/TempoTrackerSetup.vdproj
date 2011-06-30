@@ -15,7 +15,7 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_7F675C593D9D4FFC81A1CFADDFD3F977"
+        "MsmKey" = "8:_1F48529652714B589F9137E3B8560C0E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -128,7 +128,7 @@
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
-                "Version" = "8:3.5.21022"
+                "FrameworkVersion" = "8:3.5.21022"
                 "AllowLaterVersions" = "11:FALSE"
                 "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=76617"
                 }
@@ -136,10 +136,10 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7F675C593D9D4FFC81A1CFADDFD3F977"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1F48529652714B589F9137E3B8560C0E"
             {
-            "SourcePath" = "8:..\\TempoTracker\\Resources\\clock.ico"
-            "TargetName" = "8:clock.ico"
+            "SourcePath" = "8:..\\TempoTracker\\glossyclock.ico"
+            "TargetName" = "8:glossyclock.ico"
             "Tag" = "8:"
             "Folder" = "8:_55437EFBB1FB4F90B11E72498609F9C4"
             "Condition" = "8:"
@@ -164,9 +164,9 @@
         {
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_55437EFBB1FB4F90B11E72498609F9C4"
             {
-            "DefaultLocation" = "8:[ProgramFilesFolder][Manufacturer]\\[ProductName]"
+            "DefaultLocation" = "8:[ProgramFilesFolder]\\[ProductName]"
             "Name" = "8:#1925"
-            "AlwaysCreate" = "11:FALSE"
+            "AlwaysCreate" = "11:TRUE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Property" = "8:TARGETDIR"
@@ -215,6 +215,7 @@
         "ProductCode" = "8:{57C3E172-29A8-46F4-B0ED-68A4543FBBCE}"
         "PackageCode" = "8:{FD8D1F97-F798-416B-B242-F50C908484B7}"
         "UpgradeCode" = "8:{7EB1F8B1-FE98-4F24-A44D-DF5149D64BC5}"
+        "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
@@ -343,7 +344,7 @@
             "Target" = "8:_97A3941FC97F496F84D41508875FB131"
             "Folder" = "8:_C082D094382E424BB8CFAB1138B7397D"
             "WorkingFolder" = "8:_55437EFBB1FB4F90B11E72498609F9C4"
-            "Icon" = "8:_7F675C593D9D4FFC81A1CFADDFD3F977"
+            "Icon" = "8:_1F48529652714B589F9137E3B8560C0E"
             "Feature" = "8:"
             }
         }

@@ -38,24 +38,84 @@ namespace TempoTracker.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string ServiceAPI {
+        public string ServiceApi {
             get {
-                return ((string)(this["ServiceAPI"]));
+                return ((string)(this["ServiceApi"]));
             }
             set {
-                this["ServiceAPI"] = value;
+                this["ServiceApi"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string CustomAPI_URL {
+        public string CustomApiUrl {
             get {
-                return ((string)(this["CustomAPI_URL"]));
+                return ((string)(this["CustomApiUrl"]));
             }
             set {
-                this["CustomAPI_URL"] = value;
+                this["CustomApiUrl"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://USERNAME.keeptempo.com")]
+        public string apiKeepTempo {
+            get {
+                return ((string)(this["apiKeepTempo"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Not yet supported")]
+        public string apiFreshbooks {
+            get {
+                return ((string)(this["apiFreshbooks"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Not yet supported")]
+        public string apiFreckle {
+            get {
+                return ((string)(this["apiFreckle"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Not yet supported")]
+        public string apiKlok {
+            get {
+                return ((string)(this["apiKlok"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool notifyShow {
+            get {
+                return ((bool)(this["notifyShow"]));
+            }
+            set {
+                this["notifyShow"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool notifyMinimize {
+            get {
+                return ((bool)(this["notifyMinimize"]));
+            }
+            set {
+                this["notifyMinimize"] = value;
             }
         }
     }

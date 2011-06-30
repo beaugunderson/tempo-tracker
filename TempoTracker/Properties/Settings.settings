@@ -5,11 +5,29 @@
     <Setting Name="MainWindowXY" Type="System.Drawing.Point" Scope="User">
       <Value Profile="(Default)">0, 0</Value>
     </Setting>
-    <Setting Name="ServiceAPI" Type="System.String" Scope="User">
+    <Setting Name="ServiceApi" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="CustomAPI_URL" Type="System.String" Scope="User">
+    <Setting Name="CustomApiUrl" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="apiKeepTempo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://USERNAME.keeptempo.com</Value>
+    </Setting>
+    <Setting Name="apiFreshbooks" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Not yet supported</Value>
+    </Setting>
+    <Setting Name="apiFreckle" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Not yet supported</Value>
+    </Setting>
+    <Setting Name="apiKlok" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Not yet supported</Value>
+    </Setting>
+    <Setting Name="notifyShow" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="notifyMinimize" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

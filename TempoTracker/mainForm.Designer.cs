@@ -53,6 +53,7 @@ namespace TempoTracker
             this.optionsButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.Tags = new System.Windows.Forms.TextBox();
+            this.statusTimer = new System.Windows.Forms.Timer(this.components);
             this.timerEntryGroupBox.SuspendLayout();
             this.manualEntryGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.hoursNumericUpDown)).BeginInit();
@@ -90,7 +91,7 @@ namespace TempoTracker
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 15);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(45, 13);
+            this.label1.Size = new System.Drawing.Size(43, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Project:";
             // 
@@ -217,7 +218,7 @@ namespace TempoTracker
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(6, 23);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(40, 13);
+            this.label3.Size = new System.Drawing.Size(38, 13);
             this.label3.TabIndex = 0;
             this.label3.Text = "Hours:";
             // 
@@ -279,8 +280,8 @@ namespace TempoTracker
             // 
             // tempoTrackerNotifyIcon
             // 
+            this.tempoTrackerNotifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("tempoTrackerNotifyIcon.Icon")));
             this.tempoTrackerNotifyIcon.Text = "Tempo Tracker";
-            this.tempoTrackerNotifyIcon.Visible = true;
             this.tempoTrackerNotifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.tempoTrackerNotifyIcon_MouseDoubleClick);
             // 
             // optionsButton
@@ -316,6 +317,11 @@ namespace TempoTracker
             this.Tags.Size = new System.Drawing.Size(347, 20);
             this.Tags.TabIndex = 4;
             // 
+            // statusTimer
+            // 
+            this.statusTimer.Interval = 3000;
+            this.statusTimer.Tick += new System.EventHandler(this.statusTimer_Tick);
+            // 
             // MainForm
             // 
             this.AcceptButton = this.sendTimerEntryButton;
@@ -339,6 +345,7 @@ namespace TempoTracker
             this.Load += new System.EventHandler(this.mainForm_Load);
             this.Shown += new System.EventHandler(this.mainForm_Shown);
             this.DoubleClick += new System.EventHandler(this.mainForm_DoubleClick);
+            this.Resize += new System.EventHandler(this.MainForm_Resize);
             this.timerEntryGroupBox.ResumeLayout(false);
             this.timerEntryGroupBox.PerformLayout();
             this.manualEntryGroupBox.ResumeLayout(false);
@@ -380,6 +387,7 @@ namespace TempoTracker
         private System.Windows.Forms.Button optionsButton;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox Tags;
+        private System.Windows.Forms.Timer statusTimer;
     }
 }
 

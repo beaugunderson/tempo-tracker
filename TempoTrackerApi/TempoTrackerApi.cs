@@ -82,8 +82,10 @@ namespace TempoTrackerApi
         {
             var request = new RestRequest
             {
-                Resource = "projects"
+                Resource = "projects",
             };
+
+            request.AddParameter("per_page", 1000);
 
             return Execute<List<Project>>(request);
         }
