@@ -118,5 +118,89 @@ namespace TempoTracker.Properties {
                 this["notifyMinimize"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool prefClearProject {
+            get {
+                return ((bool)(this["prefClearProject"]));
+            }
+            set {
+                this["prefClearProject"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool prefDisplayTimeHoursMinutes {
+            get {
+                return ((bool)(this["prefDisplayTimeHoursMinutes"]));
+            }
+            set {
+                this["prefDisplayTimeHoursMinutes"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool perfWarnOnEmptyNotes {
+            get {
+                return ((bool)(this["perfWarnOnEmptyNotes"]));
+            }
+            set {
+                this["perfWarnOnEmptyNotes"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool perfShowInTaskbar {
+            get {
+                return ((bool)(this["perfShowInTaskbar"]));
+            }
+            set {
+                this["perfShowInTaskbar"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool perfShowTimeReminder {
+            get {
+                return ((bool)(this["perfShowTimeReminder"]));
+            }
+            set {
+                this["perfShowTimeReminder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string serviceUsername {
+            get {
+                return ((string)(this["serviceUsername"]));
+            }
+            set {
+                this["serviceUsername"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string servicePassword {
+            get {
+                return ((string)(this["servicePassword"]));
+            }
+            set {
+                this["servicePassword"] = value;
+            }
+        }
     }
 }

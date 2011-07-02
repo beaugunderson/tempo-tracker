@@ -40,7 +40,7 @@
     <ErrorReportUrl>http://jessegunderson.com/keeptempo/changelog.htm</ErrorReportUrl>
     <ProductName>Tempo Tracker</ProductName>
     <PublisherName>Gunderson Project</PublisherName>
-    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationRevision>6</ApplicationRevision>
     <ApplicationVersion>1.2.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>

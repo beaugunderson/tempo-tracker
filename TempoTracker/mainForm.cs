@@ -5,8 +5,6 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 
-using Microsoft.Win32;
-
 using TempoTracker.Utilities;
 using TempoTrackerApi;
 
@@ -34,12 +32,6 @@ namespace TempoTracker
 
         public TimeSpan Modifier { get; set; }
         public DateTime Date { get; set; }
-
-        public bool WarnOnEmptyNotesOption { get; private set; }
-        public bool ShowTimeReminderOption { get; private set; }
-        public bool ShowInTaskbarOption { get; private set; }
-        public bool ResetProjectOnSubmitOption { get; private set; }
-        public bool DisplayTimeHoursMinutesOption { get; private set; }
 
         #endregion
 
@@ -80,18 +72,9 @@ namespace TempoTracker
 
         private void ReadPreferences()
         {
-            var registryKey = Application.UserAppDataRegistry;
+            _username = AppSettings.serviceUsername;
+            _password = AppSettings.servicePassword;
             
-            if (registryKey == null)
-            {
-                MessageBox.Show("There was an error reading the user registry.", Resources.Language.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                return;
-            }
-
-            _username = registryKey.GetValue("username", string.Empty).ToString();
-            _password = ReadPassword(registryKey);
-
             _tempoTracker = new TempoTrackerApi.TempoTracker(_username, _password, Properties.Settings.Default.CustomApiUrl);
 
             if (string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password) || string.IsNullOrEmpty(Properties.Settings.Default.CustomApiUrl))
@@ -105,19 +88,11 @@ namespace TempoTracker
 
                 ReadPreferences();
             }
-
-            ShowInTaskbarOption = Convert.ToBoolean((int)registryKey.GetValue("showInTaskbar", 1));
-            ShowTimeReminderOption = Convert.ToBoolean((int)registryKey.GetValue("showTimeReminder", 0));
-            WarnOnEmptyNotesOption = Convert.ToBoolean((int)registryKey.GetValue("warnOnEmptyNotes", 1));
-            ResetProjectOnSubmitOption = Convert.ToBoolean((int)registryKey.GetValue("resetProjectOnSubmit", 1));
-            DisplayTimeHoursMinutesOption = Convert.ToBoolean((int)registryKey.GetValue("displayTimeHoursMinutes", 1));
-
-            ShowInTaskbar = ShowInTaskbarOption;
+            
+            ShowInTaskbar = AppSettings.perfShowInTaskbar;
 
             // Handle notify icon preferences
             tempoTrackerNotifyIcon.Visible = AppSettings.notifyShow;
-
-
         }
 
         private void mainForm_Shown(object sender, EventArgs e)
@@ -133,31 +108,13 @@ namespace TempoTracker
             UpdateProjects();
         }
 
-        private static string ReadPassword(RegistryKey registryKey)
-        {
-            try
-            {
-                byte[] entropy = { 0x01, 0x02, 0x03, 0x05, 0x07, 0x11 };
-                byte[] protectedSecret = Convert.FromBase64String(registryKey.GetValue("password", string.Empty).ToString());
-                byte[] secret = ProtectedData.Unprotect(protectedSecret, entropy, DataProtectionScope.CurrentUser);
-
-                return Encoding.Unicode.GetString(secret);
-            }
-            catch (CryptographicException cryptographicException)
-            {
-                Console.WriteLine(cryptographicException);
-
-                return null;
-            }
-        }
-
         private void taskTimer_Tick(object sender, EventArgs e)
         {
             _elapsed = (DateTime.Now - _start) + Modifier;
 
-            timeLinkLabel.Text = DisplayTimeHoursMinutesOption ? Time.Format(_elapsed) : Time.FuzzyFormat(_elapsed.TotalSeconds);
+            timeLinkLabel.Text = AppSettings.prefDisplayTimeHoursMinutes ? Time.Format(_elapsed) : Time.FuzzyFormat(_elapsed.TotalSeconds);
 
-            if (ShowTimeReminderOption && (int)_elapsed.TotalMinutes / 10 > _balloonTipCount)
+            if (AppSettings.perfShowTimeReminder && (int)_elapsed.TotalMinutes / 10 > _balloonTipCount)
             {
                 _balloonTipCount++;
 
@@ -180,7 +137,7 @@ namespace TempoTracker
                 statusTimer.Enabled = true;
 
 
-                if (ResetProjectOnSubmitOption)
+                if (AppSettings.prefClearProject)
                 {
                     projectsComboBox.SelectedIndex = projectsComboBox.Items.IndexOf("Select project...");
                 }
@@ -198,7 +155,7 @@ namespace TempoTracker
         {
             bool status = true;
 
-            if (WarnOnEmptyNotesOption)
+            if (AppSettings.perfWarnOnEmptyNotes)
             {
                 if (string.IsNullOrEmpty(notesTextBox.Text))
                 {
@@ -232,7 +189,7 @@ namespace TempoTracker
         {
             bool status = true;
 
-            if (WarnOnEmptyNotesOption)
+            if (AppSettings.perfWarnOnEmptyNotes)
             {
                 if (String.IsNullOrEmpty(notesTextBox.Text))
                 {
@@ -283,7 +240,7 @@ namespace TempoTracker
                 notesTextBox.Text = string.Empty;
                 timeLinkLabel.Text = string.Empty;
 
-                if (ResetProjectOnSubmitOption)
+                if (AppSettings.prefClearProject)
                 {
                     projectsComboBox.SelectedIndex = projectsComboBox.Items.IndexOf("Select project...");
                 }
