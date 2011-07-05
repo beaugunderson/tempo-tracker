@@ -175,5 +175,32 @@ namespace TempoTrackerWPF.Properties {
                 return ((string)(this["ApiKeepTempo"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Not yet implemented.")]
+        public string ApiFreckle {
+            get {
+                return ((string)(this["ApiFreckle"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Not yet implemented.")]
+        public string ApiKlok {
+            get {
+                return ((string)(this["ApiKlok"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Not yet implemented.")]
+        public string ApiFreshbooks {
+            get {
+                return ((string)(this["ApiFreshbooks"]));
+            }
+        }
     }
 }

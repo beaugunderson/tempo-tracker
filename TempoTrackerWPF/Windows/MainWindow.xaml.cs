@@ -88,9 +88,9 @@ namespace TempoTrackerWPF.Windows
 
             if (string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password) || string.IsNullOrEmpty(Properties.Settings.Default.CustomApiUrl))
             {
-                var optionsWindow = new OptionsWindow();
+                var optionsWindow = new OptionsWindow(this);
 
-                var result = optionsWindow.ShowDialog(this);
+                var result = optionsWindow.ShowDialog();
 
                 if (result.HasValue && !result.Value)
                 {
@@ -129,7 +129,12 @@ namespace TempoTrackerWPF.Windows
 
             var project = (Project)projectsComboBox.SelectedItem;
 
-            if (hoursDecimalUpDown.Value.HasValue && _tempoTracker.CreateEntry(manualEntryDatePicker.SelectedDate.Value, hoursDecimalUpDown.Value.Value, notesTextBox.Text.Trim(), project.Id, tagsTextBox.Text.Trim()).StatusCode == HttpStatusCode.Created)
+            if (_tempoTracker.CreateEntry(
+                manualEntryDatePicker.SelectedDate.Value,
+                hoursDecimalUpDown.Value.Value,
+                notesTextBox.Text.Trim(), 
+                project.Id, 
+                tagsTextBox.Text.Trim()).StatusCode == HttpStatusCode.Created)
             {
                 toolBarStatusTextBlock.Text = TempoTrackerWPF.Resources.Language.SuccessfullyCreateEvent;
 
@@ -268,9 +273,9 @@ namespace TempoTrackerWPF.Windows
                 return;
             }
 
-            var dateTimeEditForm = new DateEditDialog(_elapsed, Date);
+            var dateTimeEditForm = new DateTimeEditWindow(this, _elapsed, Date);
 
-            var result = dateTimeEditForm.ShowDialog(this);
+            var result = dateTimeEditForm.ShowDialog();
 
             if (result.HasValue && !result.Value)
             {
@@ -347,9 +352,9 @@ namespace TempoTrackerWPF.Windows
 
         private void optionsButton_Click(object sender, RoutedEventArgs e)
         {
-            var optionsWindow = new OptionsWindow();
+            var optionsWindow = new OptionsWindow(this);
 
-            var result = optionsWindow.ShowDialog(this);
+            var result = optionsWindow.ShowDialog();
             
             if (result.HasValue && result.Value)
             {

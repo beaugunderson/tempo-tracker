@@ -1,7 +1,7 @@
-﻿<Window x:Class="TempoTrackerWPF.Windows.DateEditDialog"
+﻿<Window x:Class="TempoTrackerWPF.Windows.DateTimeEditWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="DateEditDialog" Height="300" Width="300">
+        Title="DateTimeEditWindow" Height="300" Width="300">
     <Grid>
         
     </Grid>

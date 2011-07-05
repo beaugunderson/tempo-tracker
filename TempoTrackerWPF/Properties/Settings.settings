@@ -41,5 +41,14 @@
     <Setting Name="ApiKeepTempo" Type="System.String" Scope="Application">
       <Value Profile="(Default)">https://USERNAME.keeptempo.com</Value>
     </Setting>
+    <Setting Name="ApiFreckle" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Not yet implemented.</Value>
+    </Setting>
+    <Setting Name="ApiKlok" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Not yet implemented.</Value>
+    </Setting>
+    <Setting Name="ApiFreshbooks" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Not yet implemented.</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
