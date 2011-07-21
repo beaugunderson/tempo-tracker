@@ -82,6 +82,9 @@ namespace TempoTrackerWPF.Windows
             _settings.NotifyShow = showNotifyIconCheckBox.IsChecked.GetValueOrDefault();
             _settings.NotifyMinimize = minimizeToTrayCheckBox.IsChecked.GetValueOrDefault();
             _settings.ClearProject = resetProjectOnSubmitCheckBox.IsChecked.GetValueOrDefault();
+            _settings.ReminderTime = reminderTimeIntegerUpDown.Value.GetValueOrDefault();
+            _settings.IdleTimeout = idleTimeoutCheckBox.IsChecked.GetValueOrDefault();
+            _settings.IdleTime = idleTimeIntegerUpDown.Value.GetValueOrDefault();
 
             // Save Service API / Custom URL
             _settings.ServiceApi = serviceApiComboBox.SelectedItem.ToString();
@@ -119,6 +122,9 @@ namespace TempoTrackerWPF.Windows
             showNotifyIconCheckBox.IsChecked = _settings.NotifyShow;
             minimizeToTrayCheckBox.IsEnabled = _settings.NotifyShow;
             minimizeToTrayCheckBox.IsChecked = _settings.NotifyMinimize;
+            reminderTimeIntegerUpDown.Value = _settings.ReminderTime;
+            idleTimeoutCheckBox.IsChecked = _settings.IdleTimeout;
+            idleTimeIntegerUpDown.Value = _settings.IdleTime;
 
             // Load API settings 
             if (string.IsNullOrEmpty(_settings.ServiceApi) == false)

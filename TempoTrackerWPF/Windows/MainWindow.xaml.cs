@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Runtime.InteropServices;
 using System.Timers;
 using System.Windows;
 using System.Windows.Input;
@@ -22,9 +23,11 @@ namespace TempoTrackerWPF.Windows
 
             _taskTimer = new Timer();
             _statusTimer = new Timer();
+            _idleTimer = new Timer();
 
             _statusTimer.Elapsed += statusTimer_Tick;
             _taskTimer.Elapsed += taskTimer_Tick;
+            _idleTimer.Elapsed += idleTimer_Tick;
         }
 
         #region Locals
@@ -44,6 +47,7 @@ namespace TempoTrackerWPF.Windows
 
         private readonly Timer _taskTimer;
         private readonly Timer _statusTimer;
+        private readonly Timer _idleTimer;
 
         #endregion
 
@@ -54,9 +58,48 @@ namespace TempoTrackerWPF.Windows
 
         #endregion
 
+        [DllImport("user32.dll")]
+        static extern bool GetLastInputInfo(ref LASTINPUTINFO plii);
+ 
+        // Struct we'll need to pass to the function
+        internal struct LASTINPUTINFO
+        {
+            public uint cbSize;
+            public uint dwTime;
+        }
+
+        private int IdleSeconds()
+        {
+            int systemUptime = Environment.TickCount;
+            int idleTicks = 0;
+         
+            var lastInputInfo = new LASTINPUTINFO();
+
+            lastInputInfo.cbSize = (uint)Marshal.SizeOf(lastInputInfo);
+            lastInputInfo.dwTime = 0;
+         
+            if (GetLastInputInfo(ref lastInputInfo))
+            {
+                int lastInputTicks = (int)lastInputInfo.dwTime;
+
+                idleTicks = systemUptime - lastInputTicks;
+            }
+
+            // Divide by 1000 to transform the milliseconds to seconds
+            return idleTicks / 1000;
+        }
+
         private void refreshButton_Click(object sender, RoutedEventArgs e)
         {
             UpdateProjects();
+        }
+
+        private void idleTimer_Tick(object sender, ElapsedEventArgs e)
+        {
+            if (IdleSeconds() > (_settings.IdleTime * 60))
+            {
+                PauseTimer();
+            }
         }
 
         private void UpdateProjects()
@@ -84,9 +127,9 @@ namespace TempoTrackerWPF.Windows
             _username = _settings.ServiceUsername;
             _password = _settings.ServicePassword;
             
-            _tempoTracker = new TempoTracker(_username, _password, Properties.Settings.Default.CustomApiUrl);
+            _tempoTracker = new TempoTracker(_username, _password, _settings.CustomApiUrl);
 
-            if (string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password) || string.IsNullOrEmpty(Properties.Settings.Default.CustomApiUrl))
+            if (string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password) || string.IsNullOrEmpty(_settings.CustomApiUrl))
             {
                 var optionsWindow = new OptionsWindow(this);
 
@@ -102,6 +145,21 @@ namespace TempoTrackerWPF.Windows
             
             ShowInTaskbar = _settings.ShowInTaskbar;
 
+            _idleTimer.Interval = 1000;
+
+            if (_settings.IdleTimeout)
+            {
+                _idleTimer.Enabled = true;
+
+                _idleTimer.Start();
+            }
+            else
+            {
+                _idleTimer.Enabled = false;
+
+                _idleTimer.Stop();
+            }
+
             // Handle notify icon preferences
             //tempoTrackerNotifyIcon.Visible = _settings.NotifyShow;
         }
@@ -112,7 +170,7 @@ namespace TempoTrackerWPF.Windows
 
             timeLinkLabel.Content = _settings.DisplayTimeHoursMinutes ? Time.Format(_elapsed) : Time.FuzzyFormat(_elapsed.TotalSeconds);
 
-            if (_settings.ShowTimeReminder && (int)_elapsed.TotalMinutes / 10 > _balloonTipCount)
+            if (_settings.ShowTimeReminder && (int)_elapsed.TotalMinutes / _settings.ReminderTime > _balloonTipCount)
             {
                 _balloonTipCount++;
 
@@ -288,17 +346,60 @@ namespace TempoTrackerWPF.Windows
             taskTimer_Tick(sender, e);
         }
 
+        private void PauseTimer()
+        {
+            _paused = true;
+            Modifier = _elapsed;
+
+            //timerPlayPauseButton.Image = TempoTrackerWPF.Resources.Images.control_play;
+
+            _taskTimer.Enabled = false;
+            _idleTimer.Enabled = false;
+        }
+
+        private void PlayTimer()
+        {
+            _paused = false;
+            _start = DateTime.Now;
+
+            //timerPlayPauseButton.Image = TempoTrackerWPF.Resources.Images.control_pause;
+
+            _taskTimer.Enabled = true;
+
+            if (_settings.IdleTimeout)
+            {
+                _idleTimer.Enabled = false;
+            }
+        }
+
+        private void PlayTimerFirst()
+        {
+            _paused = false;
+            _start = DateTime.Now;
+            _balloonTipCount = 0;
+
+            _taskTimer.Enabled = true;
+
+            if (_settings.IdleTimeout)
+            {
+                _idleTimer.Enabled = false;
+            }
+
+            sendTimerEntryButton.IsEnabled = true;
+            timerStopButton.IsEnabled = true;
+
+            //timerPlayPauseButton.Image = TempoTrackerWPF.Resources.Images.control_pause;
+
+            Date = DateTime.Today;
+            Modifier = new TimeSpan();
+        }
+
         private void timerPlayPauseButton_Click(object sender, RoutedEventArgs e)
         {
             // Pause button clicked while timer running
             if (_taskTimer.Enabled)
             {
-                _paused = true;
-                Modifier = _elapsed;
-
-                //timerPlayPauseButton.Image = TempoTrackerWPF.Resources.Images.control_play;
-
-                _taskTimer.Enabled = false;
+                PauseTimer();
             }
             // Play button clicked...
             else
@@ -306,28 +407,12 @@ namespace TempoTrackerWPF.Windows
                 // ... while paused
                 if (_paused)
                 {
-                    _paused = false;
-                    _start = DateTime.Now;
-
-                    //timerPlayPauseButton.Image = TempoTrackerWPF.Resources.Images.control_pause;
-
-                    _taskTimer.Enabled = true;
+                    PlayTimer();
                 }
                 // ... to start the timer for the first time
                 else
                 {
-                    _paused = false;
-                    _start = DateTime.Now;
-                    _balloonTipCount = 0;
-
-                    _taskTimer.Enabled = true;
-                    sendTimerEntryButton.IsEnabled = true;
-                    timerStopButton.IsEnabled = true;
-
-                    //timerPlayPauseButton.Image = TempoTrackerWPF.Resources.Images.control_pause;
-
-                    Date = DateTime.Today;
-                    Modifier = new TimeSpan();
+                    PlayTimerFirst();
                 }
             }
         }
@@ -337,6 +422,7 @@ namespace TempoTrackerWPF.Windows
             // Reset form after submissions
             tagsTextBox.Text = string.Empty;
             notesTextBox.Text = string.Empty;
+
             hoursDecimalUpDown.Value = 0;
         }
 
@@ -396,8 +482,17 @@ namespace TempoTrackerWPF.Windows
             // Check to see if previously saved windows position exists, if so, move the form.
             if (_settings.MainWindowXY.X != 0 && _settings.MainWindowXY.Y != 0)
             {
-                Left = _settings.MainWindowXY.X;
-                Top = _settings.MainWindowXY.Y;
+                if (_settings.MainWindowXY.X > SystemParameters.WorkArea.Width ||
+                    _settings.MainWindowXY.Y > SystemParameters.WorkArea.Height)
+                {
+                    Left = (SystemParameters.WorkArea.Width / 2) - (Width / 2);
+                    Top = (SystemParameters.WorkArea.Height / 2) - (Height / 2);
+                }
+                else
+                {
+                    Left = _settings.MainWindowXY.X;
+                    Top = _settings.MainWindowXY.Y;
+                }
             }
 
             ReadPreferences();

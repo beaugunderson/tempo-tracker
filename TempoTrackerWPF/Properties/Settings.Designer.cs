@@ -202,5 +202,41 @@ namespace TempoTrackerWPF.Properties {
                 return ((string)(this["ApiFreshbooks"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int ReminderTime {
+            get {
+                return ((int)(this["ReminderTime"]));
+            }
+            set {
+                this["ReminderTime"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IdleTimeout {
+            get {
+                return ((bool)(this["IdleTimeout"]));
+            }
+            set {
+                this["IdleTimeout"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int IdleTime {
+            get {
+                return ((int)(this["IdleTime"]));
+            }
+            set {
+                this["IdleTime"] = value;
+            }
+        }
     }
 }

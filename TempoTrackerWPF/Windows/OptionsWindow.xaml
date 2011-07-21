@@ -1,7 +1,7 @@
 ﻿<Window x:Class="TempoTrackerWPF.Windows.OptionsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Options" Height="309" Width="526" MinWidth="526" MinHeight="309" Loaded="Window_Loaded">
+        Title="Options" Height="422" Width="526" MinWidth="526" MinHeight="309" Loaded="Window_Loaded" xmlns:extToolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended">
     <Grid>
         <GroupBox Header="Services" Margin="12,12,265,41" Name="groupBox1">
             <Grid>
@@ -15,14 +15,19 @@
                 <Label Content="API URL" Height="28" HorizontalAlignment="Left" Margin="10,91,0,0" Name="label4" VerticalAlignment="Top" />
             </Grid>
         </GroupBox>
-        <GroupBox Header="Notifications" Height="94" Margin="0,12,12,0" Name="groupBox2" VerticalAlignment="Top" HorizontalAlignment="Right" Width="247">
+        <GroupBox Header="Notifications" Height="179" Margin="0,12,12,0" Name="groupBox2" VerticalAlignment="Top" HorizontalAlignment="Right" Width="247">
             <Grid>
                 <CheckBox Content="Warn on empty Notes field" Height="16" HorizontalAlignment="Left" Margin="6,6,0,0" Name="warnOnEmptyNotesCheckBox" VerticalAlignment="Top" />
-                <CheckBox Content="Show time reminder every 10 minutes" Height="16" HorizontalAlignment="Left" Margin="6,50,0,0" Name="showTimeReminderCheckBox" VerticalAlignment="Top" />
                 <CheckBox Content="Reset project on submission" Height="16" HorizontalAlignment="Left" Margin="6,28,0,0" Name="resetProjectOnSubmitCheckBox" VerticalAlignment="Top" />
+                <CheckBox Content="Pause the timer on idle" Height="16" HorizontalAlignment="Left" Margin="6,50,0,0" Name="idleTimeoutCheckBox" VerticalAlignment="Top" />
+                <extToolkit:IntegerUpDown HorizontalAlignment="Left" Margin="142,96,0,0" Name="idleTimeIntegerUpDown" VerticalAlignment="Top" Width="58" />
+                <Label Content="Idle timeout (minutes)" Height="28" HorizontalAlignment="Left" Margin="0,94,0,0" Name="label5" VerticalAlignment="Top" />
+                <Label Content="Reminder interval" Height="28" HorizontalAlignment="Left" Margin="0,123,0,0" Name="label6" VerticalAlignment="Top" />
+                <extToolkit:IntegerUpDown HorizontalAlignment="Left" Margin="142,125,0,0" Name="reminderTimeIntegerUpDown" VerticalAlignment="Top" Width="58" />
+                <CheckBox Content="Display time reminders" Height="16" HorizontalAlignment="Left" Margin="6,72,0,0" Name="showTimeReminderCheckBox" VerticalAlignment="Top" />
             </Grid>
         </GroupBox>
-        <GroupBox Header="Display" Margin="0,112,12,41" Name="groupBox3" HorizontalAlignment="Right" Width="247">
+        <GroupBox Header="Display" Margin="0,197,12,41" Name="groupBox3" HorizontalAlignment="Right" Width="247">
             <Grid>
                 <CheckBox Content="Show in Taskbar" Height="16" HorizontalAlignment="Left" Margin="6,6,0,0" Name="showInTaskbarCheckBox" VerticalAlignment="Top" />
                 <CheckBox Content="Show icon in System Tray" Height="16" HorizontalAlignment="Left" Margin="6,28,0,0" Name="showNotifyIconCheckBox" VerticalAlignment="Top" Checked="showIconCheckBox_Checked" />
