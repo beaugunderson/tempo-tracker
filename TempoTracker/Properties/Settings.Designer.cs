@@ -202,5 +202,41 @@ namespace TempoTracker.Properties {
                 this["servicePassword"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int perfReminderTime {
+            get {
+                return ((int)(this["perfReminderTime"]));
+            }
+            set {
+                this["perfReminderTime"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool perfIdleTimeout {
+            get {
+                return ((bool)(this["perfIdleTimeout"]));
+            }
+            set {
+                this["perfIdleTimeout"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int perfIdleTime {
+            get {
+                return ((int)(this["perfIdleTime"]));
+            }
+            set {
+                this["perfIdleTime"] = value;
+            }
+        }
     }
 }

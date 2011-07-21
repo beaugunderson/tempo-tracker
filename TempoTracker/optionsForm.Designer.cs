@@ -45,23 +45,30 @@ namespace TempoTracker
             this.optionsTabControl = new System.Windows.Forms.TabControl();
             this.serviceInfoTab = new System.Windows.Forms.TabPage();
             this.notificationsTab = new System.Windows.Forms.TabPage();
-            this.displayOptionsTab = new System.Windows.Forms.TabPage();
-            this.minimizeToTrayCheckBox = new System.Windows.Forms.CheckBox();
-            this.showInTaskbarCheckBox = new System.Windows.Forms.CheckBox();
-            this.showNotifyIconCheckBox = new System.Windows.Forms.CheckBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.IdleTimeoutNumericBox = new System.Windows.Forms.NumericUpDown();
+            this.PauseIfIdleCheckBox = new System.Windows.Forms.CheckBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.ReminderTimeNumericBox = new System.Windows.Forms.NumericUpDown();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.displayOptionsTab = new System.Windows.Forms.TabPage();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.displayTimeHoursMinutesCheckbox = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.showInTaskbarCheckBox = new System.Windows.Forms.CheckBox();
+            this.showNotifyIconCheckBox = new System.Windows.Forms.CheckBox();
+            this.minimizeToTrayCheckBox = new System.Windows.Forms.CheckBox();
             this.optionsTabControl.SuspendLayout();
             this.serviceInfoTab.SuspendLayout();
             this.notificationsTab.SuspendLayout();
-            this.displayOptionsTab.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.IdleTimeoutNumericBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ReminderTimeNumericBox)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.displayOptionsTab.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // passwordTextBox
@@ -70,7 +77,7 @@ namespace TempoTracker
             this.passwordTextBox.Location = new System.Drawing.Point(140, 61);
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.Size = new System.Drawing.Size(114, 20);
-            this.passwordTextBox.TabIndex = 3;
+            this.passwordTextBox.TabIndex = 4;
             this.passwordTextBox.UseSystemPasswordChar = true;
             // 
             // usernameTextBox
@@ -79,7 +86,7 @@ namespace TempoTracker
             this.usernameTextBox.Location = new System.Drawing.Point(6, 61);
             this.usernameTextBox.Name = "usernameTextBox";
             this.usernameTextBox.Size = new System.Drawing.Size(114, 20);
-            this.usernameTextBox.TabIndex = 1;
+            this.usernameTextBox.TabIndex = 3;
             // 
             // label1
             // 
@@ -104,7 +111,7 @@ namespace TempoTracker
             this.saveButton.Location = new System.Drawing.Point(201, 183);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
-            this.saveButton.TabIndex = 6;
+            this.saveButton.TabIndex = 7;
             this.saveButton.Text = "&Save";
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
@@ -115,7 +122,7 @@ namespace TempoTracker
             this.cancelButton.Location = new System.Drawing.Point(120, 183);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
-            this.cancelButton.TabIndex = 5;
+            this.cancelButton.TabIndex = 6;
             this.cancelButton.Text = "&Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
@@ -125,9 +132,9 @@ namespace TempoTracker
             this.showTimeReminderCheckBox.AutoSize = true;
             this.showTimeReminderCheckBox.Location = new System.Drawing.Point(6, 19);
             this.showTimeReminderCheckBox.Name = "showTimeReminderCheckBox";
-            this.showTimeReminderCheckBox.Size = new System.Drawing.Size(201, 17);
-            this.showTimeReminderCheckBox.TabIndex = 3;
-            this.showTimeReminderCheckBox.Text = "Show time reminder every 10 minutes";
+            this.showTimeReminderCheckBox.Size = new System.Drawing.Size(147, 17);
+            this.showTimeReminderCheckBox.TabIndex = 11;
+            this.showTimeReminderCheckBox.Text = "Show time reminder every";
             this.showTimeReminderCheckBox.UseVisualStyleBackColor = true;
             // 
             // warnOnEmptyNotesCheckBox
@@ -136,7 +143,7 @@ namespace TempoTracker
             this.warnOnEmptyNotesCheckBox.Location = new System.Drawing.Point(6, 19);
             this.warnOnEmptyNotesCheckBox.Name = "warnOnEmptyNotesCheckBox";
             this.warnOnEmptyNotesCheckBox.Size = new System.Drawing.Size(149, 17);
-            this.warnOnEmptyNotesCheckBox.TabIndex = 0;
+            this.warnOnEmptyNotesCheckBox.TabIndex = 9;
             this.warnOnEmptyNotesCheckBox.Text = "Warn on empty notes field";
             this.warnOnEmptyNotesCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -146,7 +153,7 @@ namespace TempoTracker
             this.resetProjectOnSubmitCheckBox.Location = new System.Drawing.Point(6, 42);
             this.resetProjectOnSubmitCheckBox.Name = "resetProjectOnSubmitCheckBox";
             this.resetProjectOnSubmitCheckBox.Size = new System.Drawing.Size(158, 17);
-            this.resetProjectOnSubmitCheckBox.TabIndex = 1;
+            this.resetProjectOnSubmitCheckBox.TabIndex = 10;
             this.resetProjectOnSubmitCheckBox.Text = "Reset project on submission";
             this.resetProjectOnSubmitCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -171,7 +178,7 @@ namespace TempoTracker
             this.serviceApiCheckBox.Location = new System.Drawing.Point(6, 18);
             this.serviceApiCheckBox.Name = "serviceApiCheckBox";
             this.serviceApiCheckBox.Size = new System.Drawing.Size(248, 21);
-            this.serviceApiCheckBox.TabIndex = 8;
+            this.serviceApiCheckBox.TabIndex = 2;
             this.serviceApiCheckBox.SelectedIndexChanged += new System.EventHandler(this.serviceApiCheckBox_SelectedIndexChanged);
             // 
             // label4
@@ -190,7 +197,7 @@ namespace TempoTracker
             this.apiUrlTextBox.Multiline = true;
             this.apiUrlTextBox.Name = "apiUrlTextBox";
             this.apiUrlTextBox.Size = new System.Drawing.Size(248, 39);
-            this.apiUrlTextBox.TabIndex = 10;
+            this.apiUrlTextBox.TabIndex = 5;
             // 
             // optionsTabControl
             // 
@@ -202,7 +209,7 @@ namespace TempoTracker
             this.optionsTabControl.Name = "optionsTabControl";
             this.optionsTabControl.SelectedIndex = 0;
             this.optionsTabControl.Size = new System.Drawing.Size(274, 181);
-            this.optionsTabControl.TabIndex = 12;
+            this.optionsTabControl.TabIndex = 15;
             // 
             // serviceInfoTab
             // 
@@ -231,8 +238,96 @@ namespace TempoTracker
             this.notificationsTab.Padding = new System.Windows.Forms.Padding(3);
             this.notificationsTab.Size = new System.Drawing.Size(266, 155);
             this.notificationsTab.TabIndex = 1;
-            this.notificationsTab.Text = "Notifications";
+            this.notificationsTab.Text = "Reminders";
             this.notificationsTab.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.IdleTimeoutNumericBox);
+            this.groupBox2.Controls.Add(this.PauseIfIdleCheckBox);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.ReminderTimeNumericBox);
+            this.groupBox2.Controls.Add(this.showTimeReminderCheckBox);
+            this.groupBox2.Location = new System.Drawing.Point(7, 73);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(256, 78);
+            this.groupBox2.TabIndex = 5;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Reminders / Idle Settings";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(201, 43);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(43, 13);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "minutes";
+            // 
+            // IdleTimeoutNumericBox
+            // 
+            this.IdleTimeoutNumericBox.Location = new System.Drawing.Point(158, 39);
+            this.IdleTimeoutNumericBox.Maximum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
+            this.IdleTimeoutNumericBox.Name = "IdleTimeoutNumericBox";
+            this.IdleTimeoutNumericBox.Size = new System.Drawing.Size(41, 20);
+            this.IdleTimeoutNumericBox.TabIndex = 14;
+            this.IdleTimeoutNumericBox.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
+            // PauseIfIdleCheckBox
+            // 
+            this.PauseIfIdleCheckBox.AutoSize = true;
+            this.PauseIfIdleCheckBox.Location = new System.Drawing.Point(6, 42);
+            this.PauseIfIdleCheckBox.Name = "PauseIfIdleCheckBox";
+            this.PauseIfIdleCheckBox.Size = new System.Drawing.Size(155, 17);
+            this.PauseIfIdleCheckBox.TabIndex = 13;
+            this.PauseIfIdleCheckBox.Text = "Pause time if idle more than";
+            this.PauseIfIdleCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(201, 20);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(43, 13);
+            this.label5.TabIndex = 5;
+            this.label5.Text = "minutes";
+            // 
+            // ReminderTimeNumericBox
+            // 
+            this.ReminderTimeNumericBox.Location = new System.Drawing.Point(158, 16);
+            this.ReminderTimeNumericBox.Maximum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
+            this.ReminderTimeNumericBox.Name = "ReminderTimeNumericBox";
+            this.ReminderTimeNumericBox.Size = new System.Drawing.Size(41, 20);
+            this.ReminderTimeNumericBox.TabIndex = 12;
+            this.ReminderTimeNumericBox.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.warnOnEmptyNotesCheckBox);
+            this.groupBox1.Controls.Add(this.resetProjectOnSubmitCheckBox);
+            this.groupBox1.Location = new System.Drawing.Point(7, 6);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(256, 66);
+            this.groupBox1.TabIndex = 4;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Entry Submissions";
             // 
             // displayOptionsTab
             // 
@@ -245,56 +340,15 @@ namespace TempoTracker
             this.displayOptionsTab.Text = "Display Options";
             this.displayOptionsTab.UseVisualStyleBackColor = true;
             // 
-            // minimizeToTrayCheckBox
+            // groupBox4
             // 
-            this.minimizeToTrayCheckBox.AutoSize = true;
-            this.minimizeToTrayCheckBox.Location = new System.Drawing.Point(19, 58);
-            this.minimizeToTrayCheckBox.Name = "minimizeToTrayCheckBox";
-            this.minimizeToTrayCheckBox.Size = new System.Drawing.Size(139, 17);
-            this.minimizeToTrayCheckBox.TabIndex = 8;
-            this.minimizeToTrayCheckBox.Text = "Minimize to System Tray";
-            this.minimizeToTrayCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // showInTaskbarCheckBox
-            // 
-            this.showInTaskbarCheckBox.AutoSize = true;
-            this.showInTaskbarCheckBox.Location = new System.Drawing.Point(6, 19);
-            this.showInTaskbarCheckBox.Name = "showInTaskbarCheckBox";
-            this.showInTaskbarCheckBox.Size = new System.Drawing.Size(102, 17);
-            this.showInTaskbarCheckBox.TabIndex = 6;
-            this.showInTaskbarCheckBox.Text = "Show in taskbar";
-            this.showInTaskbarCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // showNotifyIconCheckBox
-            // 
-            this.showNotifyIconCheckBox.AutoSize = true;
-            this.showNotifyIconCheckBox.Location = new System.Drawing.Point(6, 38);
-            this.showNotifyIconCheckBox.Name = "showNotifyIconCheckBox";
-            this.showNotifyIconCheckBox.Size = new System.Drawing.Size(179, 17);
-            this.showNotifyIconCheckBox.TabIndex = 7;
-            this.showNotifyIconCheckBox.Text = "Show Notify Icon in System Tray";
-            this.showNotifyIconCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.warnOnEmptyNotesCheckBox);
-            this.groupBox1.Controls.Add(this.resetProjectOnSubmitCheckBox);
-            this.groupBox1.Location = new System.Drawing.Point(7, 6);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(299, 66);
-            this.groupBox1.TabIndex = 4;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Entry Submissions";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.showTimeReminderCheckBox);
-            this.groupBox2.Location = new System.Drawing.Point(7, 73);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(299, 78);
-            this.groupBox2.TabIndex = 5;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Reminders";
+            this.groupBox4.Controls.Add(this.displayTimeHoursMinutesCheckbox);
+            this.groupBox4.Location = new System.Drawing.Point(6, 88);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(257, 64);
+            this.groupBox4.TabIndex = 11;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Formatting";
             // 
             // displayTimeHoursMinutesCheckbox
             // 
@@ -302,7 +356,7 @@ namespace TempoTracker
             this.displayTimeHoursMinutesCheckbox.Location = new System.Drawing.Point(6, 19);
             this.displayTimeHoursMinutesCheckbox.Name = "displayTimeHoursMinutesCheckbox";
             this.displayTimeHoursMinutesCheckbox.Size = new System.Drawing.Size(182, 17);
-            this.displayTimeHoursMinutesCheckbox.TabIndex = 9;
+            this.displayTimeHoursMinutesCheckbox.TabIndex = 19;
             this.displayTimeHoursMinutesCheckbox.Text = "Display time in HH:MM:SS format";
             this.displayTimeHoursMinutesCheckbox.UseVisualStyleBackColor = true;
             // 
@@ -318,15 +372,35 @@ namespace TempoTracker
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Taskbar";
             // 
-            // groupBox4
+            // showInTaskbarCheckBox
             // 
-            this.groupBox4.Controls.Add(this.displayTimeHoursMinutesCheckbox);
-            this.groupBox4.Location = new System.Drawing.Point(6, 88);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(257, 64);
-            this.groupBox4.TabIndex = 11;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Formatting";
+            this.showInTaskbarCheckBox.AutoSize = true;
+            this.showInTaskbarCheckBox.Location = new System.Drawing.Point(6, 19);
+            this.showInTaskbarCheckBox.Name = "showInTaskbarCheckBox";
+            this.showInTaskbarCheckBox.Size = new System.Drawing.Size(102, 17);
+            this.showInTaskbarCheckBox.TabIndex = 16;
+            this.showInTaskbarCheckBox.Text = "Show in taskbar";
+            this.showInTaskbarCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // showNotifyIconCheckBox
+            // 
+            this.showNotifyIconCheckBox.AutoSize = true;
+            this.showNotifyIconCheckBox.Location = new System.Drawing.Point(6, 38);
+            this.showNotifyIconCheckBox.Name = "showNotifyIconCheckBox";
+            this.showNotifyIconCheckBox.Size = new System.Drawing.Size(179, 17);
+            this.showNotifyIconCheckBox.TabIndex = 17;
+            this.showNotifyIconCheckBox.Text = "Show Notify Icon in System Tray";
+            this.showNotifyIconCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // minimizeToTrayCheckBox
+            // 
+            this.minimizeToTrayCheckBox.AutoSize = true;
+            this.minimizeToTrayCheckBox.Location = new System.Drawing.Point(19, 58);
+            this.minimizeToTrayCheckBox.Name = "minimizeToTrayCheckBox";
+            this.minimizeToTrayCheckBox.Size = new System.Drawing.Size(139, 17);
+            this.minimizeToTrayCheckBox.TabIndex = 18;
+            this.minimizeToTrayCheckBox.Text = "Minimize to System Tray";
+            this.minimizeToTrayCheckBox.UseVisualStyleBackColor = true;
             // 
             // OptionsForm
             // 
@@ -351,15 +425,17 @@ namespace TempoTracker
             this.serviceInfoTab.ResumeLayout(false);
             this.serviceInfoTab.PerformLayout();
             this.notificationsTab.ResumeLayout(false);
-            this.displayOptionsTab.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.IdleTimeoutNumericBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ReminderTimeNumericBox)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.displayOptionsTab.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -391,5 +467,10 @@ namespace TempoTracker
         private System.Windows.Forms.CheckBox displayTimeHoursMinutesCheckbox;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.NumericUpDown ReminderTimeNumericBox;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.NumericUpDown IdleTimeoutNumericBox;
+        private System.Windows.Forms.CheckBox PauseIfIdleCheckBox;
     }
 }

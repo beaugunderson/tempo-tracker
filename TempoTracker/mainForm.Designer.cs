@@ -54,6 +54,7 @@ namespace TempoTracker
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.Tags = new System.Windows.Forms.TextBox();
             this.statusTimer = new System.Windows.Forms.Timer(this.components);
+            this.idleTimer = new System.Windows.Forms.Timer(this.components);
             this.timerEntryGroupBox.SuspendLayout();
             this.manualEntryGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.hoursNumericUpDown)).BeginInit();
@@ -322,6 +323,11 @@ namespace TempoTracker
             this.statusTimer.Interval = 3000;
             this.statusTimer.Tick += new System.EventHandler(this.statusTimer_Tick);
             // 
+            // idleTimer
+            // 
+            this.idleTimer.Interval = 1000;
+            this.idleTimer.Tick += new System.EventHandler(this.idleTimer_Tick);
+            // 
             // MainForm
             // 
             this.AcceptButton = this.sendTimerEntryButton;
@@ -388,6 +394,7 @@ namespace TempoTracker
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox Tags;
         private System.Windows.Forms.Timer statusTimer;
+        private System.Windows.Forms.Timer idleTimer;
     }
 }
 

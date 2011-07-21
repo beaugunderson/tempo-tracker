@@ -21,6 +21,9 @@ namespace TempoTracker
             passwordTextBox.Text = AppSettings.servicePassword;
             showInTaskbarCheckBox.Checked = AppSettings.perfShowInTaskbar;
             showTimeReminderCheckBox.Checked = AppSettings.perfShowTimeReminder;
+            ReminderTimeNumericBox.Value = AppSettings.perfReminderTime;
+            PauseIfIdleCheckBox.Checked = AppSettings.perfIdleTimeout;
+            IdleTimeoutNumericBox.Value = AppSettings.perfIdleTime;
             warnOnEmptyNotesCheckBox.Checked = AppSettings.perfWarnOnEmptyNotes;
             displayTimeHoursMinutesCheckbox.Checked = AppSettings.prefDisplayTimeHoursMinutes;
             resetProjectOnSubmitCheckBox.Checked = AppSettings.prefClearProject;
@@ -97,8 +100,11 @@ namespace TempoTracker
             AppSettings.servicePassword = passwordTextBox.Text;
             AppSettings.perfShowInTaskbar = showInTaskbarCheckBox.Checked;
             AppSettings.perfShowTimeReminder = showTimeReminderCheckBox.Checked;
+            AppSettings.perfReminderTime = Convert.ToInt32(ReminderTimeNumericBox.Value);
             AppSettings.perfWarnOnEmptyNotes = warnOnEmptyNotesCheckBox.Checked;
             AppSettings.prefDisplayTimeHoursMinutes = displayTimeHoursMinutesCheckbox.Checked;
+            AppSettings.perfIdleTimeout = PauseIfIdleCheckBox.Checked;
+            AppSettings.perfIdleTime = Convert.ToInt32(IdleTimeoutNumericBox.Value);
             AppSettings.notifyShow = showNotifyIconCheckBox.Checked;
             AppSettings.notifyMinimize = minimizeToTrayCheckBox.Checked;
             AppSettings.prefClearProject = resetProjectOnSubmitCheckBox.Checked;
