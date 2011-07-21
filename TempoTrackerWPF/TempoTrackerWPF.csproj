@@ -77,7 +77,7 @@
     <Compile Include="Windows\OptionsWindow.xaml.cs">
       <DependentUpon>OptionsWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="Windows\DateEditWindow.xaml">
+    <Page Include="Windows\DateTimeEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -89,8 +89,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Windows\DateEditWindow.xaml.cs">
-      <DependentUpon>DateEditWindow.xaml</DependentUpon>
+    <Compile Include="Windows\DateTimeEditWindow.xaml.cs">
+      <DependentUpon>DateTimeEditWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -146,6 +146,9 @@
     <Resource Include="Resources\control_pause.png" />
     <Resource Include="Resources\control_play.png" />
     <Resource Include="Resources\control_stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\glossyclock.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
