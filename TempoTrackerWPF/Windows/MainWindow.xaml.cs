@@ -49,6 +49,10 @@ namespace TempoTrackerWPF.Windows
         private readonly Timer _statusTimer;
         private readonly Timer _idleTimer;
 
+        private NotifyIcon _notifyIcon;
+
+        private readonly BitmapImage playBitmap = new BitmapImage(new Uri(@"/TempoTrackerWPF;component/Images/Control_Play.png", UriKind.Relative));
+        private readonly BitmapImage pauseBitmap = new BitmapImage(new Uri(@"/TempoTrackerWPF;component/Images/Control_Pause.png", UriKind.Relative));
         #endregion
 
         #region Properties
@@ -161,21 +165,29 @@ namespace TempoTrackerWPF.Windows
             }
 
             // Handle notify icon preferences
-            //tempoTrackerNotifyIcon.Visible = _settings.NotifyShow;
+            _notifyIcon.Visible = _settings.NotifyShow;
         }
 
         private void taskTimer_Tick(object sender, EventArgs e)
         {
             _elapsed = (DateTime.Now - _start) + Modifier;
 
-            timeLinkLabel.Content = _settings.DisplayTimeHoursMinutes ? Time.Format(_elapsed) : Time.FuzzyFormat(_elapsed.TotalSeconds);
-
-            if (_settings.ShowTimeReminder && (int)_elapsed.TotalMinutes / _settings.ReminderTime > _balloonTipCount)
+	        Dispatcher.Invoke((Action) delegate
             {
-                _balloonTipCount++;
+	            timeLinkLabel.Content = _settings.DisplayTimeHoursMinutes 
+					? Time.Format(_elapsed) 
+					: Time.FuzzyFormat(_elapsed.TotalSeconds);
 
-                //tempoTrackerNotifyIcon.ShowBalloonTip(5000, "Time update", string.Format("You've now worked {0}.", Time.Format(_elapsed)), ToolTipIcon.Info);
-            }
+	            if (_settings.ShowTimeReminder && (int)_elapsed.TotalMinutes / _settings.ReminderTime > _balloonTipCount)
+	            {
+	                _balloonTipCount++;
+
+                    _notifyIcon.ShowBalloonTip(5000, "Time update",
+                        string.Format("You've now worked {0}.",
+                            Time.Format(_elapsed)),
+                        ToolTipIcon.Info);
+                }
+            });
         }
 
         private void sendManualEntryButton_Click(object sender, EventArgs e)
@@ -305,7 +317,9 @@ namespace TempoTrackerWPF.Windows
 
                 _paused = false;
                 _taskTimer.Enabled = false;
-                //timerPlayPauseButton.Image = TempoTrackerWPF.Resources.Images.control_play;
+
+                timerPlayPauseButton.Image = playBitmap;
+
                 notesTextBox.Text = string.Empty;
                 timeLinkLabel.Content = string.Empty;
 
@@ -351,7 +365,7 @@ namespace TempoTrackerWPF.Windows
             _paused = true;
             Modifier = _elapsed;
 
-            //timerPlayPauseButton.Image = TempoTrackerWPF.Resources.Images.control_play;
+                timerPlayPauseButton.Image = playBitmap;
 
             _taskTimer.Enabled = false;
             _idleTimer.Enabled = false;
@@ -362,7 +376,7 @@ namespace TempoTrackerWPF.Windows
             _paused = false;
             _start = DateTime.Now;
 
-            //timerPlayPauseButton.Image = TempoTrackerWPF.Resources.Images.control_pause;
+            timerPlayPauseButton.Image = pauseBitmap;
 
             _taskTimer.Enabled = true;
 
@@ -388,7 +402,7 @@ namespace TempoTrackerWPF.Windows
             sendTimerEntryButton.IsEnabled = true;
             timerStopButton.IsEnabled = true;
 
-            //timerPlayPauseButton.Image = TempoTrackerWPF.Resources.Images.control_pause;
+            timerPlayPauseButton.Image = pauseBitmap;
 
             Date = DateTime.Today;
             Modifier = new TimeSpan();
@@ -430,7 +444,7 @@ namespace TempoTrackerWPF.Windows
         {
             _paused = false;
 
-            //timerPlayPauseButton.Image = TempoTrackerWPF.Resources.Images.control_play;
+            timerPlayPauseButton.Image = playBitmap;
             timerStopButton.IsEnabled = false;
 
             _taskTimer.Enabled = false;
@@ -447,13 +461,6 @@ namespace TempoTrackerWPF.Windows
                 ReadPreferences();
             }
         }
-
-        //private void tempoTrackerNotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
-        //{
-        //    Visibility = Visibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
-
-        //    WindowState = WindowState.Normal;
-        //}
 
         private void statusTimer_Tick(object sender, EventArgs e)
         {
@@ -493,11 +500,38 @@ namespace TempoTrackerWPF.Windows
                     Left = _settings.MainWindowXY.X;
                     Top = _settings.MainWindowXY.Y;
                 }
+			}
+
+            var iconInfo = Application.GetResourceStream(new Uri(@"pack://application:,,/Images/Clock.ico"));
+
+            if (iconInfo == null)
+            {
+                throw new ApplicationException("Unable to load the application icon.");
             }
 
-            ReadPreferences();
+		    using (iconInfo.Stream)
+            {
+                _notifyIcon = new NotifyIcon
+                {
+                    BalloonTipText = "Notational Ferocity has been minimized. Click the tray icon to show it.",
+                    BalloonTipTitle = "TempoTracker",
+                    Text = "TempoTracker",
+                    Icon = new Icon(iconInfo.Stream)
+                };
+
+                _notifyIcon.DoubleClick += notifyIcon_DoubleClick;
+            }
+
+			ReadPreferences();
 
             UpdateProjects();
+        }
+
+        private void notifyIcon_DoubleClick(object sender, EventArgs e)
+        {
+            Visibility = Visibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
+
+            WindowState = WindowState.Normal;
         }
     }
 }

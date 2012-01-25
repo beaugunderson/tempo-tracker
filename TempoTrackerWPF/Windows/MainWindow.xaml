@@ -2,12 +2,12 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:extToolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended"
-        xmlns:WPF="clr-namespace:TempoTrackerWPF.WPF" Title="MainWindow" 
+        xmlns:WPF="clr-namespace:TempoTrackerWPF.WPF" Title="TempoTracker" 
         Height="380" 
         Width="391" 
         ResizeMode="CanResizeWithGrip" 
         MinWidth="391" 
-        MinHeight="380" Closing="Window_Closing" SizeChanged="Window_SizeChanged" Loaded="Window_Loaded">
+        MinHeight="380" Closing="Window_Closing" SizeChanged="Window_SizeChanged" Loaded="Window_Loaded" Icon="/TempoTrackerWPF;component/Images/Clock.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="290*" />
@@ -24,7 +24,7 @@
                 <Button Content="Stop" Height="33" HorizontalAlignment="Right" Margin="0,6,87,0" Name="timerStopButton" VerticalAlignment="Top" Width="33" Click="timerStopButton_Click" />
                 <WPF:ImageButton Text="Start" Height="33" HorizontalAlignment="Right" Margin="0,6,126,0" x:Name="timerPlayPauseButton" VerticalAlignment="Top" Width="33" Click="timerPlayPauseButton_Click" />
                 <Label Content="Time:" Height="33" HorizontalAlignment="Left" Margin="6,6,0,0" Name="label2" VerticalAlignment="Top" FontSize="18" />
-                <Label Content="Duration" Height="33" Margin="65,6,165,0" Name="timeLinkLabel" VerticalAlignment="Top" FontSize="18" Foreground="Blue" MouseDown="timeLinkLabel_LinkClicked"></Label>
+                <Label Content="0.00" Height="33" Margin="65,6,165,0" Name="timeLinkLabel" VerticalAlignment="Top" FontSize="18" Foreground="Blue" MouseDown="timeLinkLabel_LinkClicked"></Label>
             </Grid>
         </GroupBox>
         <GroupBox Header="Tags" Height="57" Margin="12,120,12,0" VerticalAlignment="Top">
@@ -45,6 +45,6 @@
                 <Button Content="Send Entry" Height="24" HorizontalAlignment="Right" Margin="0,8,6,0" Name="sendManualEntryButton" VerticalAlignment="Top" Width="75" Click="sendManualEntryButton_Click" />
             </Grid>
         </GroupBox>
-        <TextBlock Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="9,0,0,0" Name="toolBarStatusTextBlock" Text="TextBlock" VerticalAlignment="Top" Padding="3" />
+        <TextBlock Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="9,0,0,0" Name="toolBarStatusTextBlock" Text="" VerticalAlignment="Top" Padding="3" />
     </Grid>
 </Window>

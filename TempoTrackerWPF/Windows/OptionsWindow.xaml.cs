@@ -26,7 +26,7 @@ namespace TempoTrackerWPF.Windows
 
         private bool FormVerified()
         {
-            if (string.IsNullOrEmpty(usernameTextBox.Text) || string.IsNullOrEmpty(passwordTextBox.Text) || serviceApiComboBox.SelectedIndex < 0)
+            if (string.IsNullOrEmpty(usernameTextBox.Text) || string.IsNullOrEmpty(passwordBox.Password) || serviceApiComboBox.SelectedIndex < 0)
             {
                 MessageBox.Show("Please enter a username and password, and select an API", "Error", MessageBoxButton.OK, MessageBoxImage.Stop);
 
@@ -73,7 +73,7 @@ namespace TempoTrackerWPF.Windows
             // TODO: Replace all of this with bindings
             // Save preferences
             _settings.ServiceUsername = usernameTextBox.Text;
-            _settings.ServicePassword = passwordTextBox.Text;
+            _settings.ServicePassword = passwordBox.Password;
             
             _settings.ShowInTaskbar = showInTaskbarCheckBox.IsChecked.GetValueOrDefault();
             _settings.ShowTimeReminder = showTimeReminderCheckBox.IsChecked.GetValueOrDefault();
@@ -110,9 +110,14 @@ namespace TempoTrackerWPF.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            serviceApiComboBox.Items.Add("Keep Tempo");
+            serviceApiComboBox.Items.Add("Freckle");
+            serviceApiComboBox.Items.Add("Freshbooks");
+            serviceApiComboBox.Items.Add("Klok");
+
             // TODO: Replace all of this with bindings
             usernameTextBox.Text = _settings.ServiceUsername;
-            passwordTextBox.Text = _settings.ServicePassword;
+            passwordBox.Password = _settings.ServicePassword;
             
             showInTaskbarCheckBox.IsChecked = _settings.ShowInTaskbar;
             showTimeReminderCheckBox.IsChecked = _settings.ShowTimeReminder;
@@ -155,7 +160,7 @@ namespace TempoTrackerWPF.Windows
             if (serviceApiComboBox.SelectedIndex >= 0)
             {
                 usernameTextBox.IsEnabled = true;
-                passwordTextBox.IsEnabled = true;
+                passwordBox.IsEnabled = true;
                 apiUrlTextBox.IsEnabled = true;
             }
         }

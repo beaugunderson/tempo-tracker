@@ -10,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyTitle("TempoTrackerWPF")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyCompany("Beau Gunderson")]
 [assembly: AssemblyProduct("TempoTrackerWPF")]
 [assembly: AssemblyCopyright("Copyright © Microsoft 2011")]
 [assembly: AssemblyTrademark("")]
