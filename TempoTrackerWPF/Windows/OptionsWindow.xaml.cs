@@ -74,7 +74,7 @@ namespace TempoTrackerWPF.Windows
             // Save preferences
             _settings.ServiceUsername = usernameTextBox.Text;
             _settings.ServicePassword = passwordBox.Password;
-            
+
             _settings.ShowInTaskbar = showInTaskbarCheckBox.IsChecked.GetValueOrDefault();
             _settings.ShowTimeReminder = showTimeReminderCheckBox.IsChecked.GetValueOrDefault();
             _settings.WarnOnEmptyNotes = warnOnEmptyNotesCheckBox.IsChecked.GetValueOrDefault();
@@ -118,7 +118,7 @@ namespace TempoTrackerWPF.Windows
             // TODO: Replace all of this with bindings
             usernameTextBox.Text = _settings.ServiceUsername;
             passwordBox.Password = _settings.ServicePassword;
-            
+
             showInTaskbarCheckBox.IsChecked = _settings.ShowInTaskbar;
             showTimeReminderCheckBox.IsChecked = _settings.ShowTimeReminder;
             warnOnEmptyNotesCheckBox.IsChecked = _settings.WarnOnEmptyNotes;

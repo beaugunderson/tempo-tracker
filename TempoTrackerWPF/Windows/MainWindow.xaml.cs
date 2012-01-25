@@ -1,14 +1,19 @@
 ﻿using System;
+using System.Drawing;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Timers;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
-
+using System.Windows.Media.Imaging;
 using Point = System.Drawing.Point;
 
 using TempoTrackerApi;
 using TempoTrackerWPF.Utilities;
+using Application = System.Windows.Application;
+using MessageBox = System.Windows.MessageBox;
+using Timer = System.Timers.Timer;
 
 namespace TempoTrackerWPF.Windows
 {
@@ -64,7 +69,7 @@ namespace TempoTrackerWPF.Windows
 
         [DllImport("user32.dll")]
         static extern bool GetLastInputInfo(ref LASTINPUTINFO plii);
- 
+
         // Struct we'll need to pass to the function
         internal struct LASTINPUTINFO
         {
@@ -76,12 +81,12 @@ namespace TempoTrackerWPF.Windows
         {
             int systemUptime = Environment.TickCount;
             int idleTicks = 0;
-         
+
             var lastInputInfo = new LASTINPUTINFO();
 
             lastInputInfo.cbSize = (uint)Marshal.SizeOf(lastInputInfo);
             lastInputInfo.dwTime = 0;
-         
+
             if (GetLastInputInfo(ref lastInputInfo))
             {
                 int lastInputTicks = (int)lastInputInfo.dwTime;
@@ -130,7 +135,7 @@ namespace TempoTrackerWPF.Windows
         {
             _username = _settings.ServiceUsername;
             _password = _settings.ServicePassword;
-            
+
             _tempoTracker = new TempoTracker(_username, _password, _settings.CustomApiUrl);
 
             if (string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password) || string.IsNullOrEmpty(_settings.CustomApiUrl))
@@ -146,7 +151,7 @@ namespace TempoTrackerWPF.Windows
 
                 ReadPreferences();
             }
-            
+
             ShowInTaskbar = _settings.ShowInTaskbar;
 
             _idleTimer.Interval = 1000;
@@ -172,15 +177,15 @@ namespace TempoTrackerWPF.Windows
         {
             _elapsed = (DateTime.Now - _start) + Modifier;
 
-	        Dispatcher.Invoke((Action) delegate
+            Dispatcher.Invoke((Action)delegate
             {
-	            timeLinkLabel.Content = _settings.DisplayTimeHoursMinutes 
-					? Time.Format(_elapsed) 
-					: Time.FuzzyFormat(_elapsed.TotalSeconds);
+                timeLinkLabel.Content = _settings.DisplayTimeHoursMinutes
+                    ? Time.Format(_elapsed)
+                    : Time.FuzzyFormat(_elapsed.TotalSeconds);
 
-	            if (_settings.ShowTimeReminder && (int)_elapsed.TotalMinutes / _settings.ReminderTime > _balloonTipCount)
-	            {
-	                _balloonTipCount++;
+                if (_settings.ShowTimeReminder && (int)_elapsed.TotalMinutes / _settings.ReminderTime > _balloonTipCount)
+                {
+                    _balloonTipCount++;
 
                     _notifyIcon.ShowBalloonTip(5000, "Time update",
                         string.Format("You've now worked {0}.",
@@ -202,8 +207,8 @@ namespace TempoTrackerWPF.Windows
             if (_tempoTracker.CreateEntry(
                 manualEntryDatePicker.SelectedDate.Value,
                 hoursDecimalUpDown.Value.Value,
-                notesTextBox.Text.Trim(), 
-                project.Id, 
+                notesTextBox.Text.Trim(),
+                project.Id,
                 tagsTextBox.Text.Trim()).StatusCode == HttpStatusCode.Created)
             {
                 toolBarStatusTextBlock.Text = TempoTrackerWPF.Resources.Language.SuccessfullyCreateEvent;
@@ -365,7 +370,7 @@ namespace TempoTrackerWPF.Windows
             _paused = true;
             Modifier = _elapsed;
 
-                timerPlayPauseButton.Image = playBitmap;
+            timerPlayPauseButton.Image = playBitmap;
 
             _taskTimer.Enabled = false;
             _idleTimer.Enabled = false;
@@ -455,7 +460,7 @@ namespace TempoTrackerWPF.Windows
             var optionsWindow = new OptionsWindow(this);
 
             var result = optionsWindow.ShowDialog();
-            
+
             if (result.HasValue && result.Value)
             {
                 ReadPreferences();
@@ -500,7 +505,7 @@ namespace TempoTrackerWPF.Windows
                     Left = _settings.MainWindowXY.X;
                     Top = _settings.MainWindowXY.Y;
                 }
-			}
+            }
 
             var iconInfo = Application.GetResourceStream(new Uri(@"pack://application:,,/Images/Clock.ico"));
 
@@ -509,7 +514,7 @@ namespace TempoTrackerWPF.Windows
                 throw new ApplicationException("Unable to load the application icon.");
             }
 
-		    using (iconInfo.Stream)
+            using (iconInfo.Stream)
             {
                 _notifyIcon = new NotifyIcon
                 {
@@ -522,7 +527,7 @@ namespace TempoTrackerWPF.Windows
                 _notifyIcon.DoubleClick += notifyIcon_DoubleClick;
             }
 
-			ReadPreferences();
+            ReadPreferences();
 
             UpdateProjects();
         }

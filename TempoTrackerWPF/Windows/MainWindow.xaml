@@ -7,7 +7,11 @@
         Width="391" 
         ResizeMode="CanResizeWithGrip" 
         MinWidth="391" 
-        MinHeight="380" Closing="Window_Closing" SizeChanged="Window_SizeChanged" Loaded="Window_Loaded" Icon="/TempoTrackerWPF;component/Images/Clock.ico">
+        MinHeight="380"
+        Closing="Window_Closing" 
+        SizeChanged="Window_SizeChanged" 
+        Loaded="Window_Loaded" 
+        Icon="/TempoTrackerWPF;component/Images/Clock.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="290*" />
